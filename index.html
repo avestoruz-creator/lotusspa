@@ -65,6 +65,7 @@
       crossorigin
     />
 
+    <!-- Detect dark mode preference and set the class before next-themes loads. This avoids a flash of unstyled content (FOUC) when the page loads. -->
     <script>
       try {
         let theme = localStorage.getItem("theme");
