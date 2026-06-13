@@ -103,7 +103,6 @@ const whyUs = [
   { icon: Clock, title: "Удобный график",           desc: "11:00 – 04:00 ежедневно" },
 ];
 
-// ── Service categories for the telo.uz-style grid ─────────────────────────────
 const serviceCategories = [
   {
     key: "massage",
@@ -149,14 +148,13 @@ const serviceCategories = [
   },
 ];
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
 function ActionButtons({ light = false, className = "" }: { light?: boolean; className?: string }) {
   return (
     <div className={`flex flex-wrap gap-3 ${className}`}>
       <a href={TEL_HREF} className={`flex items-center gap-2 border px-5 py-2.5 rounded-full text-sm font-medium transition-all cursor-pointer font-sans tracking-wide ${light ? "border-white/40 text-white hover:bg-white/10" : "border-primary text-primary hover:bg-primary hover:text-primary-foreground"}`}>
         <Phone className="w-4 h-4" /> Позвонить
       </a>
-      <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all cursor-pointer font-sans tracking-wide ${light ? "bg-white text-foreground hover:bg-white/90" : "bg-primary text-primary-foreground hover:opacity-90"}`}>
+      <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all cursor-pointer font-sans tracking-wide ${light ? "bg-white text-neutral-900 hover:bg-white/90" : "bg-primary text-primary-foreground hover:opacity-90"}`}>
         <CalendarCheck className="w-4 h-4" /> Записаться
       </a>
     </div>
@@ -171,7 +169,6 @@ function Label({ children, light = false }: { children: React.ReactNode; light?:
   );
 }
 
-// ── MAIN ──────────────────────────────────────────────────────────────────────
 export default function Index() {
   const [activeBranch, setActiveBranch] = useState<Branch>("karasaray");
   const [dayType, setDayType]           = useState<DayType>("weekday");
@@ -248,7 +245,7 @@ export default function Index() {
               Сауна · Хаммам · Массаж
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="bg-white text-foreground px-10 py-3.5 rounded-full text-xs font-medium tracking-[0.2em] uppercase hover:bg-white/92 transition-all cursor-pointer font-sans">
+              <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="bg-white text-neutral-900 px-10 py-3.5 rounded-full text-xs font-medium tracking-[0.2em] uppercase hover:bg-white/92 transition-all cursor-pointer font-sans">
                 Записаться онлайн
               </a>
               <a href={TEL_HREF} className="border border-white/50 text-white px-10 py-3.5 rounded-full text-xs font-light tracking-[0.2em] uppercase hover:bg-white/10 transition-all cursor-pointer font-sans">
@@ -279,7 +276,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ── SERVICES GRID (telo.uz style) ── */}
+      {/* ── SERVICES GRID ── */}
       <section id="services" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
@@ -287,7 +284,6 @@ export default function Index() {
             <h2 className="font-sans text-5xl md:text-6xl font-light">услуги</h2>
           </motion.div>
 
-          {/* 3×2 grid exactly like telo.uz */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {serviceCategories.map((cat, i) => (
               <motion.a
@@ -304,16 +300,11 @@ export default function Index() {
                   alt={cat.label}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                {/* Dark overlay like telo.uz */}
                 <div className="absolute inset-0 bg-black/45 group-hover:bg-black/35 transition-colors duration-500" />
-
-                {/* Label top-left */}
                 <div className="absolute top-5 left-5 right-10">
                   <p className="font-sans text-white text-xl md:text-2xl font-light leading-tight">{cat.label}</p>
                   {cat.count && <p className="text-white/55 text-xs font-sans mt-1.5 tracking-wide">{cat.count}</p>}
                 </div>
-
-                {/* Arrow top-right */}
                 <div className="absolute top-5 right-5 w-8 h-8 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-white/15 transition-all">
                   <ArrowRight className="w-3.5 h-3.5 text-white" />
                 </div>
@@ -331,7 +322,6 @@ export default function Index() {
             <h2 className="font-sans text-5xl font-light">массажи тела</h2>
           </motion.div>
 
-          {/* 3-column grid of cards — like telo.uz "виды массажей" */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {massageServices.map((card, i) => (
               <motion.div
@@ -357,7 +347,6 @@ export default function Index() {
                     <h3 className="font-sans text-xl font-normal mb-1.5 hover:text-primary transition-colors">{card.title}</h3>
                   </Link>
                   <p className="text-muted-foreground text-xs font-sans font-light leading-relaxed mb-4">{card.shortDesc}</p>
-                  {/* Prices inline */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {card.prices.map((p) => (
                       <div key={p.label} className="text-xs font-sans text-muted-foreground">
@@ -460,7 +449,6 @@ export default function Index() {
             ))}
           </div>
 
-          {/* Parkas */}
           <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-card border border-border rounded-2xl p-8">
             <h3 className="font-sans text-2xl font-light mb-6">Парка</h3>
             <div className="grid grid-cols-3 gap-4 mb-7">
@@ -640,7 +628,7 @@ export default function Index() {
               <a href={TEL_HREF} className="flex items-center justify-center gap-2 bg-transparent border border-white/40 text-white px-8 py-3.5 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/10 transition-all cursor-pointer">
                 <Phone className="w-3.5 h-3.5" /> {PHONE}
               </a>
-              <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white text-foreground px-8 py-3.5 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/90 transition-all cursor-pointer">
+              <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white text-neutral-900 px-8 py-3.5 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/90 transition-all cursor-pointer">
                 <CalendarCheck className="w-3.5 h-3.5" /> Telegram: @spalotus01
               </a>
             </div>
