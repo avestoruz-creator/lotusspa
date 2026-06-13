@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Lotus Spa — Сауна, Хаммам и Массаж в Ташкенте</title>
+    <meta name="description" content="Lotus Spa — премиум-спа в Ташкенте. Классический, ароматический, оздоровительный массаж. Сауна и хаммам. Три филиала. Запись онлайн." />
+    <meta name="keywords" content="спа Ташкент, массаж Ташкент, сауна Ташкент, хаммам Ташкент, Lotus Spa, расслабляющий массаж, оздоровительный массаж" />
+    <meta name="author" content="Lotus Spa" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://lotus-spa.onhercules.app/" />
+
+    <link rel="icon" type="image/png" href="https://hercules-cdn.com/file_fy8O5ShjsbsxHlV2zjafjcq3" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Lotus Spa — Сауна, Хаммам и Массаж в Ташкенте" />
+    <meta property="og:description" content="Премиум-спа в Ташкенте. Классический, ароматический, оздоровительный массаж. Сауна и хаммам. Три филиала. Запись онлайн." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lotus-spa.onhercules.app/" />
+    <meta property="og:image" content="https://hercules-cdn.com/file_fy8O5ShjsbsxHlV2zjafjcq3" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="Lotus Spa" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Lotus Spa — Сауна, Хаммам и Массаж в Ташкенте" />
+    <meta name="twitter:description" content="Премиум-спа в Ташкенте. Массаж, сауна, хаммам. Запись онлайн." />
+    <meta name="twitter:image" content="https://hercules-cdn.com/file_fy8O5ShjsbsxHlV2zjafjcq3" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "DaySpa",
+      "name": "Lotus Spa",
+      "description": "Премиум-спа в Ташкенте — массаж, сауна, хаммам",
+      "url": "https://lotus-spa.onhercules.app/",
+      "logo": "https://hercules-cdn.com/file_fy8O5ShjsbsxHlV2zjafjcq3",
+      "image": "https://hercules-cdn.com/file_fy8O5ShjsbsxHlV2zjafjcq3",
+      "telephone": "+998712059565",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Ташкент",
+        "addressCountry": "UZ"
+      },
+      "openingHours": "Mo-Su 11:00-04:00",
+      "sameAs": [
+        "https://t.me/spalotus01",
+        "https://instagram.com/lotus_spa.uz"
+      ],
+      "priceRange": "$$",
+      "currenciesAccepted": "UZS",
+      "paymentAccepted": "Cash, Credit Card"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
+      rel="stylesheet"
+      crossorigin
+    />
+
+    <script>
+      try {
+        let theme = localStorage.getItem("theme");
+        if (theme === "system" || !theme) {
+          let prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+          ).matches;
+          theme = prefersDark ? "dark" : "light";
+        }
+        document.documentElement.classList.add(theme);
+      } catch (e) {}
+    </script>
+
+    <link href="/src/index.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
