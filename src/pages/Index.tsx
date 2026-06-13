@@ -103,6 +103,7 @@ const whyUs = [
   { icon: Clock, title: "Удобный график",           desc: "11:00 – 04:00 ежедневно" },
 ];
 
+// ── Service categories for the telo.uz-style grid ─────────────────────────────
 const serviceCategories = [
   {
     key: "massage",
@@ -148,6 +149,7 @@ const serviceCategories = [
   },
 ];
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
 function ActionButtons({ light = false, className = "" }: { light?: boolean; className?: string }) {
   return (
     <div className={`flex flex-wrap gap-3 ${className}`}>
@@ -169,6 +171,7 @@ function Label({ children, light = false }: { children: React.ReactNode; light?:
   );
 }
 
+// ── MAIN ──────────────────────────────────────────────────────────────────────
 export default function Index() {
   const [activeBranch, setActiveBranch] = useState<Branch>("karasaray");
   const [dayType, setDayType]           = useState<DayType>("weekday");
@@ -177,7 +180,7 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-background">
 
-      {/* NAVBAR */}
+      {/* ── NAVBAR ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="max-w-6xl mx-auto px-5 py-3.5 flex items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-3 shrink-0 cursor-pointer">
@@ -188,7 +191,7 @@ export default function Index() {
             />
             <div>
               <div className="font-sans text-xl font-medium text-primary leading-tight tracking-widest uppercase">Lotus</div>
-              <div className="text-[8px] tracking-[0.3em] uppercase text-muted-foreground leading-tight font-sans">Spa &amp; Hammam</div>
+              <div className="text-[8px] tracking-[0.3em] uppercase text-muted-foreground leading-tight font-sans">Spa & Hammam</div>
             </div>
           </Link>
 
@@ -214,7 +217,7 @@ export default function Index() {
         </div>
       </nav>
 
-      {/* HERO */}
+      {/* ── HERO ── */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -263,7 +266,7 @@ export default function Index() {
         </motion.div>
       </section>
 
-      {/* WHY US */}
+      {/* ── WHY US bar ── */}
       <section className="py-14 px-4 bg-primary text-primary-foreground">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           {whyUs.map((item, i) => (
@@ -276,13 +279,15 @@ export default function Index() {
         </div>
       </section>
 
-      {/* SERVICES GRID */}
+      {/* ── SERVICES GRID (telo.uz style) ── */}
       <section id="services" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
             <Label>Все направления</Label>
             <h2 className="font-sans text-5xl md:text-6xl font-light">услуги</h2>
           </motion.div>
+
+          {/* 3x2 grid exactly like telo.uz */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {serviceCategories.map((cat, i) => (
               <motion.a
@@ -294,12 +299,21 @@ export default function Index() {
                 viewport={{ once: true }}
                 className="group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer block"
               >
-                <img src={cat.img} alt={cat.label} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img
+                  src={cat.img}
+                  alt={cat.label}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                {/* Dark overlay like telo.uz */}
                 <div className="absolute inset-0 bg-black/45 group-hover:bg-black/35 transition-colors duration-500" />
+
+                {/* Label top-left */}
                 <div className="absolute top-5 left-5 right-10">
                   <p className="font-sans text-white text-xl md:text-2xl font-light leading-tight">{cat.label}</p>
                   {cat.count && <p className="text-white/55 text-xs font-sans mt-1.5 tracking-wide">{cat.count}</p>}
                 </div>
+
+                {/* Arrow top-right */}
                 <div className="absolute top-5 right-5 w-8 h-8 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-white/15 transition-all">
                   <ArrowRight className="w-3.5 h-3.5 text-white" />
                 </div>
@@ -309,21 +323,32 @@ export default function Index() {
         </div>
       </section>
 
-      {/* MASSAGE LIST */}
+      {/* ── MASSAGE LIST ── */}
       <section id="massage-list" className="py-20 px-4 bg-muted/40">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
             <Label>Виды массажа</Label>
             <h2 className="font-sans text-5xl font-light">массажи тела</h2>
           </motion.div>
+
+          {/* 3-column grid of cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {massageServices.map((card, i) => (
-              <motion.div key={card.key} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07, duration: 0.5 } as const} viewport={{ once: true }} className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
+              <motion.div
+                key={card.key}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.07, duration: 0.5 } as const}
+                viewport={{ once: true }}
+                className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow"
+              >
                 <Link to={`/service/${card.key}`} className="block cursor-pointer">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img src={card.img} alt={card.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                     {card.tag && (
-                      <span className="absolute top-3 left-3 text-[10px] font-semibold bg-primary/90 text-primary-foreground px-3 py-1 rounded-full font-sans tracking-wider uppercase">{card.tag}</span>
+                      <span className="absolute top-3 left-3 text-[10px] font-semibold bg-primary/90 text-primary-foreground px-3 py-1 rounded-full font-sans tracking-wider uppercase">
+                        {card.tag}
+                      </span>
                     )}
                   </div>
                 </Link>
@@ -332,6 +357,7 @@ export default function Index() {
                     <h3 className="font-sans text-xl font-normal mb-1.5 hover:text-primary transition-colors">{card.title}</h3>
                   </Link>
                   <p className="text-muted-foreground text-xs font-sans font-light leading-relaxed mb-4">{card.shortDesc}</p>
+                  {/* Prices inline */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {card.prices.map((p) => (
                       <div key={p.label} className="text-xs font-sans text-muted-foreground">
@@ -340,9 +366,15 @@ export default function Index() {
                     ))}
                   </div>
                   <div className="flex items-center gap-2">
-                    <a href={TEL_HREF} className="flex items-center gap-1.5 border border-border text-foreground/70 px-3.5 py-2 rounded-full text-xs font-medium hover:border-primary hover:text-primary transition-all cursor-pointer font-sans"><Phone className="w-3 h-3" /> Позвонить</a>
-                    <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-primary text-primary-foreground px-3.5 py-2 rounded-full text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer font-sans"><CalendarCheck className="w-3 h-3" /> Записаться</a>
-                    <Link to={`/service/${card.key}`} className="ml-auto text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer font-sans flex items-center gap-1">Подробнее <ArrowRight className="w-3 h-3" /></Link>
+                    <a href={TEL_HREF} className="flex items-center gap-1.5 border border-border text-foreground/70 px-3.5 py-2 rounded-full text-xs font-medium hover:border-primary hover:text-primary transition-all cursor-pointer font-sans">
+                      <Phone className="w-3 h-3" /> Позвонить
+                    </a>
+                    <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-primary text-primary-foreground px-3.5 py-2 rounded-full text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer font-sans">
+                      <CalendarCheck className="w-3 h-3" /> Записаться
+                    </a>
+                    <Link to={`/service/${card.key}`} className="ml-auto text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer font-sans flex items-center gap-1">
+                      Подробнее <ArrowRight className="w-3 h-3" />
+                    </Link>
                   </div>
                 </div>
               </motion.div>
@@ -351,20 +383,30 @@ export default function Index() {
         </div>
       </section>
 
-      {/* SAUNA LIST */}
+      {/* ── SAUNA / HAMMAM LIST ── */}
       <section id="sauna-list" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
             <Label>Парение и тепло</Label>
             <h2 className="font-sans text-5xl font-light">сауна и хаммам</h2>
           </motion.div>
+
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {saunaServices.map((item, i) => (
-              <motion.div key={item.key} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1, duration: 0.5 } as const} viewport={{ once: true }} className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
+              <motion.div
+                key={item.key}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1, duration: 0.5 } as const}
+                viewport={{ once: true }}
+                className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow"
+              >
                 <Link to={`/service/${item.key}`} className="block cursor-pointer">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                    {item.tag && <span className="absolute top-3 left-3 text-[10px] font-semibold bg-primary/90 text-primary-foreground px-3 py-1 rounded-full font-sans tracking-wider uppercase">{item.tag}</span>}
+                    {item.tag && (
+                      <span className="absolute top-3 left-3 text-[10px] font-semibold bg-primary/90 text-primary-foreground px-3 py-1 rounded-full font-sans tracking-wider uppercase">{item.tag}</span>
+                    )}
                   </div>
                 </Link>
                 <div className="p-5">
@@ -374,8 +416,12 @@ export default function Index() {
                   </Link>
                   <p className="text-muted-foreground text-xs font-sans font-light leading-relaxed mb-4">{item.shortDesc}</p>
                   <div className="flex items-center gap-2">
-                    <a href={TEL_HREF} className="flex items-center gap-1.5 border border-border text-foreground/70 px-3.5 py-2 rounded-full text-xs font-medium hover:border-primary hover:text-primary transition-all cursor-pointer font-sans"><Phone className="w-3 h-3" /> Позвонить</a>
-                    <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-primary text-primary-foreground px-3.5 py-2 rounded-full text-xs font-medium hover:opacity-90 cursor-pointer font-sans"><CalendarCheck className="w-3 h-3" /> Записаться</a>
+                    <a href={TEL_HREF} className="flex items-center gap-1.5 border border-border text-foreground/70 px-3.5 py-2 rounded-full text-xs font-medium hover:border-primary hover:text-primary transition-all cursor-pointer font-sans">
+                      <Phone className="w-3 h-3" /> Позвонить
+                    </a>
+                    <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-primary text-primary-foreground px-3.5 py-2 rounded-full text-xs font-medium hover:opacity-90 cursor-pointer font-sans">
+                      <CalendarCheck className="w-3 h-3" /> Записаться
+                    </a>
                   </div>
                 </div>
               </motion.div>
@@ -384,13 +430,14 @@ export default function Index() {
         </div>
       </section>
 
-      {/* BODY CARE */}
+      {/* ── BODY CARE ── */}
       <section id="body-care" className="py-20 px-4 bg-muted/40">
         <div className="max-w-5xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
             <Label>Дополнительно</Label>
             <h2 className="font-sans text-5xl font-light">уход за телом</h2>
           </motion.div>
+
           <div className="grid sm:grid-cols-3 gap-5 mb-8">
             {[
               { name: "Скраб", duration: "20 мин", price: "230 000", img: "https://images.unsplash.com/photo-1597010804526-2fcb8a09865b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=600" },
@@ -398,7 +445,9 @@ export default function Index() {
               { name: "Пенная мойка", duration: "20 мин", price: "180 000", img: "https://images.unsplash.com/photo-1700918232124-f64da19e73eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=600" },
             ].map((s, i) => (
               <motion.div key={s.name} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 } as const} viewport={{ once: true }} className="group bg-card border border-border rounded-2xl overflow-hidden">
-                <div className="aspect-[3/2] overflow-hidden"><img src={s.img} alt={s.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+                <div className="aspect-[3/2] overflow-hidden">
+                  <img src={s.img} alt={s.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
                 <div className="p-5">
                   <div className="font-sans text-lg mb-1">{s.name}</div>
                   <div className="flex items-center justify-between text-xs mb-4 font-sans">
@@ -410,6 +459,8 @@ export default function Index() {
               </motion.div>
             ))}
           </div>
+
+          {/* Parkas */}
           <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-card border border-border rounded-2xl p-8">
             <h3 className="font-sans text-2xl font-light mb-6">Парка</h3>
             <div className="grid grid-cols-3 gap-4 mb-7">
@@ -430,13 +481,14 @@ export default function Index() {
         </div>
       </section>
 
-      {/* SPA PROGRAMS */}
+      {/* ── SPA PROGRAMS ── */}
       <section id="programs" className="py-20 px-4 bg-primary text-primary-foreground">
         <div className="max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
             <Label light>Готовые сеты</Label>
             <h2 className="font-sans text-5xl font-light">spa программы</h2>
           </motion.div>
+
           <div className="space-y-2.5 mb-10">
             {spaPrograms.map((prog, i) => (
               <motion.div key={prog.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.07 } as const} viewport={{ once: true }} className="flex items-center justify-between bg-white/8 hover:bg-white/12 transition-colors rounded-xl p-5 gap-4">
@@ -458,13 +510,14 @@ export default function Index() {
         </div>
       </section>
 
-      {/* PRICING */}
+      {/* ── PRICING TABLE ── */}
       <section id="pricing" className="py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
             <Label>Аренда</Label>
             <h2 className="font-sans text-5xl font-light">цены на сауну</h2>
           </motion.div>
+
           <div className="flex flex-wrap gap-3 mb-7">
             {(Object.keys(pricingData) as Branch[]).map((key) => (
               <button key={key} onClick={() => setActiveBranch(key)} className={`px-5 py-2.5 rounded-full text-xs font-medium transition-all cursor-pointer font-sans tracking-wider uppercase ${activeBranch === key ? "bg-primary text-primary-foreground" : "bg-card border border-border hover:border-primary/40"}`}>
@@ -472,6 +525,7 @@ export default function Index() {
               </button>
             ))}
           </div>
+
           <div className="flex gap-3 mb-10">
             {(["weekday", "weekend"] as DayType[]).map((dt) => (
               <button key={dt} onClick={() => setDayType(dt)} className={`px-6 py-2 rounded-full text-xs transition-all cursor-pointer font-sans tracking-wider uppercase ${dayType === dt ? "bg-accent text-accent-foreground" : "border border-border hover:border-accent/50"}`}>
@@ -479,9 +533,13 @@ export default function Index() {
               </button>
             ))}
           </div>
+
           <div className={`grid gap-6 ${branch.vip ? "md:grid-cols-2" : "max-w-sm"}`}>
             <motion.div key={`${activeBranch}-${dayType}-sauna`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-card border border-border rounded-2xl overflow-hidden">
-              <div className="bg-primary text-primary-foreground p-5"><h3 className="font-sans text-xl">Сауна / Хаммам</h3><p className="text-white/45 text-xs mt-1 font-sans">до 4 человек</p></div>
+              <div className="bg-primary text-primary-foreground p-5">
+                <h3 className="font-sans text-xl">Сауна / Хаммам</h3>
+                <p className="text-white/45 text-xs mt-1 font-sans">до 4 человек</p>
+              </div>
               <div className="p-5">
                 {branch.sauna[dayType].map((row) => (
                   <div key={row.time} className="flex items-center justify-between py-3 border-b border-border last:border-0">
@@ -491,9 +549,13 @@ export default function Index() {
                 ))}
               </div>
             </motion.div>
+
             {branch.vip && (
               <motion.div key={`${activeBranch}-${dayType}-vip`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-card border border-accent/25 rounded-2xl overflow-hidden">
-                <div className="bg-accent text-accent-foreground p-5"><h3 className="font-sans text-xl">Сауна VIP</h3><p className="text-white/50 text-xs mt-1 font-sans">до 4 человек</p></div>
+                <div className="bg-accent text-accent-foreground p-5">
+                  <h3 className="font-sans text-xl">Сауна VIP</h3>
+                  <p className="text-white/50 text-xs mt-1 font-sans">до 4 человек</p>
+                </div>
                 <div className="p-5">
                   {branch.vip[dayType].map((row) => (
                     <div key={row.time} className="flex items-center justify-between py-3 border-b border-border last:border-0">
@@ -505,6 +567,7 @@ export default function Index() {
               </motion.div>
             )}
           </div>
+
           <div className="mt-5 bg-muted/60 border border-border rounded-xl p-4 flex items-center gap-3 text-sm font-sans">
             <Users className="w-4 h-4 text-accent shrink-0" />
             <span className="text-muted-foreground text-xs">Доплата за человека свыше 4-х: <strong className="text-foreground">{branch.extra} сум / 1 час</strong></span>
@@ -513,7 +576,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* PROMOS */}
+      {/* ── PROMOS ── */}
       <section id="promos" className="py-20 px-4 bg-muted/40">
         <div className="max-w-5xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
@@ -546,7 +609,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* BRANCHES */}
+      {/* ── BRANCHES ── */}
       <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
@@ -560,39 +623,53 @@ export default function Index() {
               { name: "Ц1 / Паркент",         address: "Филиалы Ц1 и Паркент" },
             ].map((b, i) => (
               <motion.div key={b.name} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 } as const} viewport={{ once: true }} className="bg-card border border-border rounded-2xl p-6">
-                <div className="w-10 h-10 bg-primary/8 rounded-full flex items-center justify-center mb-4"><MapPin className="w-4 h-4 text-primary" /></div>
+                <div className="w-10 h-10 bg-primary/8 rounded-full flex items-center justify-center mb-4">
+                  <MapPin className="w-4 h-4 text-primary" />
+                </div>
                 <h3 className="font-sans text-xl mb-1">{b.name}</h3>
                 <p className="text-muted-foreground text-xs font-sans">{b.address}</p>
               </motion.div>
             ))}
           </div>
+
+          {/* Final CTA */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-primary text-primary-foreground rounded-2xl p-10 md:p-14 text-center">
             <h3 className="font-sans text-4xl font-light mb-2">Готовы расслабиться?</h3>
             <p className="text-white/45 mb-8 font-sans font-light text-xs tracking-widest uppercase">Запишитесь прямо сейчас</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href={TEL_HREF} className="flex items-center justify-center gap-2 border border-white/40 text-white px-8 py-3.5 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/10 transition-all cursor-pointer"><Phone className="w-3.5 h-3.5" /> {PHONE}</a>
-              <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white text-foreground px-8 py-3.5 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/90 transition-all cursor-pointer"><CalendarCheck className="w-3.5 h-3.5" /> Telegram: @spalotus01</a>
+              <a href={TEL_HREF} className="flex items-center justify-center gap-2 border border-white/40 text-white px-8 py-3.5 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/10 transition-all cursor-pointer">
+                <Phone className="w-3.5 h-3.5" /> {PHONE}
+              </a>
+              <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white text-foreground px-8 py-3.5 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/90 transition-all cursor-pointer">
+                <CalendarCheck className="w-3.5 h-3.5" /> Telegram: @spalotus01
+              </a>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* ── FOOTER ── */}
       <footer className="border-t border-border py-10 px-4">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <img src={LOGO_URL} alt="Lotus Spa" className="h-9 w-9 object-cover rounded-full" />
+            <img src={LOGO_URL} alt="Lotus Spa" className="h-9 w-9 object-cover rounded-full border border-border" />
             <div>
               <div className="font-sans text-lg font-medium text-primary tracking-widest uppercase">Lotus Spa</div>
               <div className="text-[8px] tracking-[0.25em] uppercase text-muted-foreground font-sans">Сауна · Хаммам · Массаж</div>
             </div>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-5 text-xs text-muted-foreground font-sans">
-            <a href={TEL_HREF} className="flex items-center gap-2 hover:text-foreground transition-colors cursor-pointer"><Phone className="w-3.5 h-3.5" /> {PHONE}</a>
-            <a href="https://instagram.com/lotus_spa.uz" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors cursor-pointer">Instagram: {INSTAGRAM}</a>
-            <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors cursor-pointer">Telegram: @spalotus01</a>
+            <a href={TEL_HREF} className="flex items-center gap-2 hover:text-foreground transition-colors cursor-pointer">
+              <Phone className="w-3.5 h-3.5" /> {PHONE}
+            </a>
+            <a href="https://instagram.com/lotus_spa.uz" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors cursor-pointer">
+              Instagram: {INSTAGRAM}
+            </a>
+            <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors cursor-pointer">
+              Telegram: @spalotus01
+            </a>
           </div>
-          <div className="text-[11px] text-muted-foreground font-sans">{`© ${new Date().getFullYear()} Lotus Spa`}</div>
+          <div className="text-[11px] text-muted-foreground font-sans">© {new Date().getFullYear()} Lotus Spa</div>
         </div>
       </footer>
     </div>
