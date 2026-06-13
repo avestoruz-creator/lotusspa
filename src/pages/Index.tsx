@@ -187,7 +187,7 @@ export default function Index() {
             <img
               src={LOGO_URL}
               alt="Lotus Spa"
-              className="w-10 h-10 rounded-full object-cover shrink-0"
+              className="w-10 h-10 rounded-full object-contain bg-white/5 shrink-0"
             />
             <div>
               <div className="font-sans text-xl font-medium text-primary leading-tight tracking-widest uppercase">Lotus</div>
@@ -287,7 +287,7 @@ export default function Index() {
             <h2 className="font-sans text-5xl md:text-6xl font-light">услуги</h2>
           </motion.div>
 
-          {/* 3x2 grid exactly like telo.uz */}
+          {/* 3×2 grid exactly like telo.uz */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {serviceCategories.map((cat, i) => (
               <motion.a
@@ -331,7 +331,7 @@ export default function Index() {
             <h2 className="font-sans text-5xl font-light">массажи тела</h2>
           </motion.div>
 
-          {/* 3-column grid of cards */}
+          {/* 3-column grid of cards — like telo.uz "виды массажей" */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {massageServices.map((card, i) => (
               <motion.div
@@ -637,7 +637,7 @@ export default function Index() {
             <h3 className="font-sans text-4xl font-light mb-2">Готовы расслабиться?</h3>
             <p className="text-white/45 mb-8 font-sans font-light text-xs tracking-widest uppercase">Запишитесь прямо сейчас</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href={TEL_HREF} className="flex items-center justify-center gap-2 border border-white/40 text-white px-8 py-3.5 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/10 transition-all cursor-pointer">
+              <a href={TEL_HREF} className="flex items-center justify-center gap-2 bg-transparent border border-white/40 text-white px-8 py-3.5 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/10 transition-all cursor-pointer">
                 <Phone className="w-3.5 h-3.5" /> {PHONE}
               </a>
               <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white text-foreground px-8 py-3.5 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/90 transition-all cursor-pointer">
@@ -652,7 +652,7 @@ export default function Index() {
       <footer className="border-t border-border py-10 px-4">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <img src={LOGO_URL} alt="Lotus Spa" className="h-9 w-9 object-cover rounded-full border border-border" />
+            <img src={LOGO_URL} alt="Lotus Spa" className="h-9 w-9 object-contain rounded-full" />
             <div>
               <div className="font-sans text-lg font-medium text-primary tracking-widest uppercase">Lotus Spa</div>
               <div className="text-[8px] tracking-[0.25em] uppercase text-muted-foreground font-sans">Сауна · Хаммам · Массаж</div>
