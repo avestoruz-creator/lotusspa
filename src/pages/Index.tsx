@@ -142,7 +142,7 @@ const serviceCategories = [
   {
     key: "pricing",
     label: "Цены на аренду",
-    count: "3 филиала",
+    count: "5 филиалов",
     img: "https://images.unsplash.com/photo-1585815157396-ad62043f721b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=900",
     href: "#pricing",
   },
@@ -181,11 +181,7 @@ export default function Index() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="max-w-6xl mx-auto px-5 py-3.5 flex items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-3 shrink-0 cursor-pointer">
-            <img
-              src={LOGO_URL}
-              alt="Lotus Spa"
-              className="w-10 h-10 rounded-full object-contain bg-white/5 shrink-0"
-            />
+            <img src={LOGO_URL} alt="Lotus Spa" className="w-10 h-10 rounded-full object-contain bg-white/5 shrink-0" />
             <div>
               <div className="font-sans text-xl font-medium text-primary leading-tight tracking-widest uppercase">Lotus</div>
               <div className="text-[8px] tracking-[0.3em] uppercase text-muted-foreground leading-tight font-sans">Spa & Hammam</div>
@@ -283,7 +279,6 @@ export default function Index() {
             <Label>Все направления</Label>
             <h2 className="font-sans text-5xl md:text-6xl font-light">услуги</h2>
           </motion.div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {serviceCategories.map((cat, i) => (
               <motion.a
@@ -295,11 +290,7 @@ export default function Index() {
                 viewport={{ once: true }}
                 className="group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer block"
               >
-                <img
-                  src={cat.img}
-                  alt={cat.label}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
+                <img src={cat.img} alt={cat.label} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-black/45 group-hover:bg-black/35 transition-colors duration-500" />
                 <div className="absolute top-5 left-5 right-10">
                   <p className="font-sans text-white text-xl md:text-2xl font-light leading-tight">{cat.label}</p>
@@ -321,7 +312,6 @@ export default function Index() {
             <Label>Виды массажа</Label>
             <h2 className="font-sans text-5xl font-light">массажи тела</h2>
           </motion.div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {massageServices.map((card, i) => (
               <motion.div
@@ -336,9 +326,7 @@ export default function Index() {
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img src={card.img} alt={card.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                     {card.tag && (
-                      <span className="absolute top-3 left-3 text-[10px] font-semibold bg-primary/90 text-primary-foreground px-3 py-1 rounded-full font-sans tracking-wider uppercase">
-                        {card.tag}
-                      </span>
+                      <span className="absolute top-3 left-3 text-[10px] font-semibold bg-primary/90 text-primary-foreground px-3 py-1 rounded-full font-sans tracking-wider uppercase">{card.tag}</span>
                     )}
                   </div>
                 </Link>
@@ -379,7 +367,6 @@ export default function Index() {
             <Label>Парение и тепло</Label>
             <h2 className="font-sans text-5xl font-light">сауна и хаммам</h2>
           </motion.div>
-
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {saunaServices.map((item, i) => (
               <motion.div
@@ -426,7 +413,6 @@ export default function Index() {
             <Label>Дополнительно</Label>
             <h2 className="font-sans text-5xl font-light">уход за телом</h2>
           </motion.div>
-
           <div className="grid sm:grid-cols-3 gap-5 mb-8">
             {[
               { name: "Скраб", duration: "20 мин", price: "230 000", img: "https://images.unsplash.com/photo-1597010804526-2fcb8a09865b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=600" },
@@ -448,7 +434,6 @@ export default function Index() {
               </motion.div>
             ))}
           </div>
-
           <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-card border border-border rounded-2xl p-8">
             <h3 className="font-sans text-2xl font-light mb-6">Парка</h3>
             <div className="grid grid-cols-3 gap-4 mb-7">
@@ -476,7 +461,6 @@ export default function Index() {
             <Label light>Готовые сеты</Label>
             <h2 className="font-sans text-5xl font-light">spa программы</h2>
           </motion.div>
-
           <div className="space-y-2.5 mb-10">
             {spaPrograms.map((prog, i) => (
               <motion.div key={prog.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.07 } as const} viewport={{ once: true }} className="flex items-center justify-between bg-white/8 hover:bg-white/12 transition-colors rounded-xl p-5 gap-4">
@@ -505,7 +489,6 @@ export default function Index() {
             <Label>Аренда</Label>
             <h2 className="font-sans text-5xl font-light">цены на сауну</h2>
           </motion.div>
-
           <div className="flex flex-wrap gap-3 mb-7">
             {(Object.keys(pricingData) as Branch[]).map((key) => (
               <button key={key} onClick={() => setActiveBranch(key)} className={`px-5 py-2.5 rounded-full text-xs font-medium transition-all cursor-pointer font-sans tracking-wider uppercase ${activeBranch === key ? "bg-primary text-primary-foreground" : "bg-card border border-border hover:border-primary/40"}`}>
@@ -513,7 +496,6 @@ export default function Index() {
               </button>
             ))}
           </div>
-
           <div className="flex gap-3 mb-10">
             {(["weekday", "weekend"] as DayType[]).map((dt) => (
               <button key={dt} onClick={() => setDayType(dt)} className={`px-6 py-2 rounded-full text-xs transition-all cursor-pointer font-sans tracking-wider uppercase ${dayType === dt ? "bg-accent text-accent-foreground" : "border border-border hover:border-accent/50"}`}>
@@ -521,7 +503,6 @@ export default function Index() {
               </button>
             ))}
           </div>
-
           <div className={`grid gap-6 ${branch.vip ? "md:grid-cols-2" : "max-w-sm"}`}>
             <motion.div key={`${activeBranch}-${dayType}-sauna`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-card border border-border rounded-2xl overflow-hidden">
               <div className="bg-primary text-primary-foreground p-5">
@@ -537,7 +518,6 @@ export default function Index() {
                 ))}
               </div>
             </motion.div>
-
             {branch.vip && (
               <motion.div key={`${activeBranch}-${dayType}-vip`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-card border border-accent/25 rounded-2xl overflow-hidden">
                 <div className="bg-accent text-accent-foreground p-5">
@@ -555,7 +535,6 @@ export default function Index() {
               </motion.div>
             )}
           </div>
-
           <div className="mt-5 bg-muted/60 border border-border rounded-xl p-4 flex items-center gap-3 text-sm font-sans">
             <Users className="w-4 h-4 text-accent shrink-0" />
             <span className="text-muted-foreground text-xs">Доплата за человека свыше 4-х: <strong className="text-foreground">{branch.extra} сум / 1 час</strong></span>
@@ -604,19 +583,56 @@ export default function Index() {
             <Label>Мы рядом</Label>
             <h2 className="font-sans text-5xl font-light">наши филиалы</h2>
           </motion.div>
-          <div className="grid md:grid-cols-3 gap-5 mb-12">
+
+          {/* 5 separate branches — each with its own Yandex Maps link */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
             {[
-              { name: "Карасарай",            address: "Филиал Карасарай" },
-              { name: "Сергели / Авиасозлар", address: "Филиалы Сергели и Авиасозлар" },
-              { name: "Ц1 / Паркент",         address: "Филиалы Ц1 и Паркент" },
+              {
+                name: "Карасарай",
+                address: "Ташкент, Карасарай",
+                maps: "https://yandex.ru/maps/org/spa_salon_lotus/142852799852?si=1xkw6vc9febqeq652mmtczg4g0",
+              },
+              {
+                name: "Сергели",
+                address: "Ташкент, Сергели",
+                maps: "https://yandex.ru/maps?text=41.214138,69.250587&si=1xkw6vc9febqeq652mmtczg4g0",
+              },
+              {
+                name: "Авиасозлар",
+                address: "Ташкент, Авиасозлар",
+                maps: "https://yandex.ru/maps/org/lotus/200576364332?si=1xkw6vc9febqeq652mmtczg4g0",
+              },
+              {
+                name: "Ц1",
+                address: "Ташкент, Ц1",
+                maps: "https://yandex.ru/maps/org/lotus_spa/160305475985?si=1xkw6vc9febqeq652mmtczg4g0",
+              },
+              {
+                name: "Паркент",
+                address: "Ташкент, Паркент",
+                maps: "https://yandex.ru/maps/org/lotus/208608820890?si=1xkw6vc9febqeq652mmtczg4g0",
+              },
             ].map((b, i) => (
-              <motion.div key={b.name} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 } as const} viewport={{ once: true }} className="bg-card border border-border rounded-2xl p-6">
-                <div className="w-10 h-10 bg-primary/8 rounded-full flex items-center justify-center mb-4">
+              <motion.a
+                key={b.name}
+                href={b.maps}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.08 } as const}
+                viewport={{ once: true }}
+                className="group bg-card border border-border rounded-2xl p-6 hover:border-primary/40 hover:shadow-md transition-all cursor-pointer block"
+              >
+                <div className="w-10 h-10 bg-primary/8 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
                   <MapPin className="w-4 h-4 text-primary" />
                 </div>
-                <h3 className="font-sans text-xl mb-1">{b.name}</h3>
-                <p className="text-muted-foreground text-xs font-sans">{b.address}</p>
-              </motion.div>
+                <h3 className="font-sans text-xl mb-1 group-hover:text-primary transition-colors">{b.name}</h3>
+                <p className="text-muted-foreground text-xs font-sans mb-3">{b.address}</p>
+                <span className="text-[10px] font-sans text-primary/70 tracking-widest uppercase group-hover:text-primary transition-colors">
+                  Открыть на карте →
+                </span>
+              </motion.a>
             ))}
           </div>
 
