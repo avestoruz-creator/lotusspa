@@ -23,22 +23,36 @@ export default function ServicePage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* ── NAVBAR ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="max-w-6xl mx-auto px-5 py-3.5 flex items-center justify-between gap-4">
-          <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer font-sans tracking-wider uppercase">
-            <ArrowLeft className="w-4 h-4" /> Назад
+          {/* Back button — left */}
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer font-sans tracking-wider uppercase"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Назад
           </button>
+
+          {/* Logo — center */}
           <Link to="/" className="flex items-center gap-2.5 cursor-pointer absolute left-1/2 -translate-x-1/2">
             <img src={LOGO_URL} alt="Lotus Spa" className="h-10 w-10 object-cover rounded-full shrink-0" />
             <span className="font-sans text-base font-medium text-primary tracking-widest uppercase">Lotus Spa</span>
           </Link>
-          <button onClick={() => navigate("/")} className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer p-1">
+
+          {/* Close — right */}
+          <button
+            onClick={() => navigate("/")}
+            className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer p-1"
+          >
             <X className="w-5 h-5" />
           </button>
         </div>
       </nav>
 
       <div className="pt-14">
+        {/* ── MAIN CONTENT: image-left + text-right (telo.uz layout) ── */}
         <div className="max-w-6xl mx-auto px-5 py-14 md:py-20">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -46,6 +60,7 @@ export default function ServicePage() {
             transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] as const }}
             className="grid md:grid-cols-2 gap-10 md:gap-16 items-start mb-16"
           >
+            {/* Left — Image */}
             <div className="rounded-2xl overflow-hidden aspect-[3/4] md:aspect-[4/5]">
               <motion.img
                 src={service.img}
@@ -56,29 +71,49 @@ export default function ServicePage() {
                 transition={{ duration: 1.4, ease: "easeOut" } as const}
               />
             </div>
+
+            {/* Right — Text */}
             <div className="py-2">
               {service.tag && (
-                <motion.span initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 } as const} className="inline-block text-[10px] font-semibold bg-primary/8 text-primary px-4 py-1.5 rounded-full mb-5 font-sans tracking-widest uppercase">
+                <motion.span
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 } as const}
+                  className="inline-block text-[10px] font-semibold bg-primary/8 text-primary px-4 py-1.5 rounded-full mb-5 font-sans tracking-widest uppercase"
+                >
                   {service.tag}
                 </motion.span>
               )}
+
               <h1 className="font-sans text-4xl md:text-5xl font-light mb-4 leading-tight">{service.title}</h1>
+
+              {/* Price line like telo.uz: "60-90 мин // 530 000–770 000 UZS" */}
               {service.prices.length > 0 && (
                 <p className="text-muted-foreground font-sans font-light text-sm mb-6 tracking-wide">
                   {service.prices.map((p) => p.label).join("-")} // {service.prices.map((p) => p.price).join("–")} UZS
                 </p>
               )}
+
+              {/* Main description */}
               <div className="space-y-4 mb-8">
                 {service.fullDesc.split("\n\n").map((para, i) => (
                   <p key={i} className="text-foreground/70 font-sans font-light text-sm leading-relaxed">{para}</p>
                 ))}
               </div>
+
+              {/* What's included */}
               {service.details && service.details.length > 0 && (
                 <div className="mb-8">
                   <p className="text-xs font-sans font-medium tracking-widest uppercase text-accent mb-3">Что включено</p>
                   <ul className="space-y-2">
                     {service.details.map((d, i) => (
-                      <motion.li key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + i * 0.07 } as const} className="flex items-start gap-2.5 text-sm font-sans text-foreground/70">
+                      <motion.li
+                        key={i}
+                        initial={{ opacity: 0, x: -8 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.3 + i * 0.07 } as const}
+                        className="flex items-start gap-2.5 text-sm font-sans text-foreground/70"
+                      >
                         <CheckCircle2 className="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" />
                         {d}
                       </motion.li>
@@ -89,29 +124,54 @@ export default function ServicePage() {
                   )}
                 </div>
               )}
+
+              {/* CTA buttons */}
               <div className="flex flex-wrap gap-3">
-                <a href={TEL_HREF} className="flex items-center gap-2 border border-primary text-primary px-7 py-3 rounded-full text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-all cursor-pointer font-sans tracking-wider uppercase">
+                <a
+                  href={TEL_HREF}
+                  className="flex items-center gap-2 border border-primary text-primary px-7 py-3 rounded-full text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-all cursor-pointer font-sans tracking-wider uppercase"
+                >
                   <Phone className="w-3.5 h-3.5" /> Позвонить
                 </a>
-                <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3 rounded-full text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer font-sans tracking-wider uppercase">
+                <a
+                  href={TG_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3 rounded-full text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer font-sans tracking-wider uppercase"
+                >
                   <CalendarCheck className="w-3.5 h-3.5" /> Записаться онлайн
                 </a>
               </div>
             </div>
           </motion.div>
 
+          {/* ── OTHER SERVICES (like telo.uz "другие процедуры") ── */}
           <div>
             <h2 className="font-sans text-3xl font-light mb-8">другие процедуры</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
               {otherServices.slice(0, 8).map((s, i) => (
-                <motion.div key={s.key} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.06 } as const}>
-                  <Link to={`/service/${s.key}`} className="group block cursor-pointer">
+                <motion.div
+                  key={s.key}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + i * 0.06 } as const}
+                >
+                  <Link
+                    to={`/service/${s.key}`}
+                    className="group block cursor-pointer"
+                  >
                     <div className="rounded-2xl overflow-hidden aspect-[3/4] mb-3">
-                      <img src={s.img} alt={s.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      <img
+                        src={s.img}
+                        alt={s.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
                     </div>
                     <p className="font-sans text-base font-light mb-1 group-hover:text-primary transition-colors leading-snug">{s.title}</p>
                     <p className="text-muted-foreground text-[11px] font-sans">
-                      {s.prices.length > 0 ? s.prices.map((p) => `${p.label} // ${p.price}`).join(" · ") : s.subtitle}
+                      {s.prices.length > 0
+                        ? s.prices.map((p) => `${p.label} // ${p.price}`).join(" · ")
+                        : s.subtitle}
                     </p>
                   </Link>
                 </motion.div>
@@ -119,7 +179,13 @@ export default function ServicePage() {
             </div>
           </div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 } as const} className="mt-16 bg-primary text-primary-foreground rounded-2xl p-10 text-center">
+          {/* Bottom CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 } as const}
+            className="mt-16 bg-primary text-primary-foreground rounded-2xl p-10 text-center"
+          >
             <h3 className="font-sans text-3xl font-light mb-2">Готовы записаться?</h3>
             <p className="text-white/40 text-[10px] mb-7 font-sans tracking-widest uppercase">Наши мастера ждут вас</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
