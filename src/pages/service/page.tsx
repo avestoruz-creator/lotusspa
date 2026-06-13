@@ -37,7 +37,7 @@ export default function ServicePage() {
 
           {/* Logo — center */}
           <Link to="/" className="flex items-center gap-2.5 cursor-pointer absolute left-1/2 -translate-x-1/2">
-            <img src={LOGO_URL} alt="Lotus Spa" className="h-10 w-10 object-cover rounded-full shrink-0" />
+            <img src={LOGO_URL} alt="Lotus Spa" className="h-10 w-10 object-contain rounded-full shrink-0" />
             <span className="font-sans text-base font-medium text-primary tracking-widest uppercase">Lotus Spa</span>
           </Link>
 
@@ -189,7 +189,7 @@ export default function ServicePage() {
             <h3 className="font-sans text-3xl font-light mb-2">Готовы записаться?</h3>
             <p className="text-white/40 text-[10px] mb-7 font-sans tracking-widest uppercase">Наши мастера ждут вас</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a href={TEL_HREF} className="flex items-center justify-center gap-2 border border-white/35 text-white px-7 py-3 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/10 transition-all cursor-pointer">
+              <a href={TEL_HREF} className="flex items-center justify-center gap-2 bg-transparent border border-white/35 text-white px-7 py-3 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/10 transition-all cursor-pointer">
                 <Phone className="w-3.5 h-3.5" /> Позвонить
               </a>
               <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white text-foreground px-7 py-3 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/90 transition-all cursor-pointer">
