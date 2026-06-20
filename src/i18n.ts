@@ -74,7 +74,7 @@ const translationModules = import.meta.glob<{ default: Record<string, string> }>
 const resources: Record<string, Record<string, Record<string, string>>> = {};
 
 for (const [path, module] of Object.entries(translationModules)) {
-  const match = path.match(/\.\/locales\/([^/]+)\/([^/]+)\.json$/);
+  const match = path.match(/\.\/locales\/([^\/]+)\/([^\/]+)\.json$/);
   if (match) {
     const [, lng, ns] = match;
     if (!resources[lng]) resources[lng] = {};
