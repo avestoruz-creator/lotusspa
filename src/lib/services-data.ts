@@ -7,19 +7,18 @@ export const LOGO_URL   = "https://hercules-cdn.com/file_fy8O5ShjsbsxHlV2zjafjcq
 export const INSTAGRAM  = "@lotus_spa.uz";
 
 export const IMG = {
-  hero:        "https://images.unsplash.com/photo-1716467195935-2d798a043fef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1920",
-  klassik:     "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=900",
-  aroma:       "https://images.unsplash.com/photo-1741522509438-a120c0bb5e88?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=900",
-  ozdor:       "https://images.unsplash.com/photo-1639162906614-0603b0ae95fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=900",
-  silovoy:     "https://images.unsplash.com/photo-1745327883508-b6cd32e5dde5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=900",
-  akvamuylny:  "https://images.unsplash.com/photo-1583333004011-fe5ff9bcea0e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=900",
-  hotstone:    "https://images.unsplash.com/photo-1696841212541-449ca29397cc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=900",
-  sauna:       "https://images.unsplash.com/photo-1712659604528-b179a3634560?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=900",
-  saunaVip:    "https://images.unsplash.com/photo-1585815157396-ad62043f721b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=900",
-  hammam:      "https://images.unsplash.com/photo-1761470575018-135c213340eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=900",
-  scrub:       "https://images.unsplash.com/photo-1597010804526-2fcb8a09865b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=600",
-  piling:      "https://images.unsplash.com/photo-1623808222757-67fa5a397c34?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=600",
-  foam:        "https://images.unsplash.com/photo-1700918232124-f64da19e73eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=600",
+  hero:        "https://images.unsplash.com/photo-1716467195935-2d798a043fef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=1400",
+  klassik:     "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
+  aroma:       "https://hercules-cdn.com/file_1gD2h5Ny2HjGM83yecBJ87Q7",
+  ozdor:       "https://images.unsplash.com/photo-1639162906614-0603b0ae95fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
+  silovoy:     "https://images.unsplash.com/photo-1745327883508-b6cd32e5dde5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
+  akvamuylny:  "https://hercules-cdn.com/file_IZZLHeqzpZ9H0KVD2OGdQD8v",
+  sauna:       "https://hercules-cdn.com/file_BY7zaTrcX6sXhWt74rdo6eGU",
+  saunaVip:    "https://images.unsplash.com/photo-1585815157396-ad62043f721b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
+  hammam:      "https://hercules-cdn.com/file_u6pPawZhMo0akIm9iPpZSpME",
+  scrub:       "https://hercules-cdn.com/file_2M7TuEyTZ1r66M3xfR6jDel0",
+  piling:      "https://hercules-cdn.com/file_9OAJyNDN86zM9CALz3bLMIUR",
+  foam:        "https://hercules-cdn.com/file_nrBh0WbzAM4ixhASfnBBNK33",
 };
 
 export type ServicePrice = { label: string; price: string };
@@ -29,11 +28,11 @@ export type ServiceItem = {
   title: string;
   subtitle: string;
   img: string;
-  tag?: string; // optional "ТОП" badge
+  tag?: string;
   shortDesc: string;
   fullDesc: string;
   prices: ServicePrice[];
-  details?: string[]; // bullet points for the detail page
+  details?: string[];
   recommended?: string;
 };
 
@@ -118,23 +117,6 @@ export const massageServices: ServiceItem[] = [
       "Увлажнение и питание кожи",
     ],
     recommended: "Можно проводить еженедельно",
-  },
-  {
-    key: "hotstone",
-    title: "Массаж горячими камнями",
-    subtitle: "Тепло вулканических камней",
-    img: IMG.hotstone,
-    tag: "Премиум",
-    shortDesc: "Тёплые базальтовые камни проникают в глубь мышц, расслабляя самые труднодоступные участки.",
-    fullDesc: "Массаж горячими камнями — это древняя восточная практика, возрождённая в современном спа. Специально нагретые базальтовые камни укладываются на ключевые точки тела и используются для массажных движений.\n\nТепло камней прогревает глубокие слои мышц, которых невозможно достичь обычным массажем. Это снимает хронические боли в спине, улучшает кровообращение, нормализует работу нервной системы. Ощущение тепла, покоя и полного растворения в пространстве гарантировано.",
-    prices: [{ label: "90 мин", price: "от 870 000" }],
-    details: [
-      "Натуральные базальтовые камни вулканического происхождения",
-      "Прогрев глубоких мышечных слоёв",
-      "Снятие хронических болей в спине",
-      "Глубокая релаксация нервной системы",
-    ],
-    recommended: "Рекомендованный курс: 3–5 посещений",
   },
 ];
 
