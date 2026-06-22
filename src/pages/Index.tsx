@@ -7,7 +7,7 @@ import { SUPPORTED_LOCALES, type SupportedLocale, setLocaleInPath } from "@/i18n
 import {
   massageServices, saunaServices, IMG,
   LOGO_URL, PHONE, TEL_HREF, TG_LINK, INSTAGRAM,
-} from "@/lib/services-data.ts";
+} from "@/lib/services-data";
 
 type Branch  = "karasaray" | "sergeli" | "c1";
 type DayType = "weekday" | "weekend";
@@ -121,43 +121,37 @@ const whyUs = (t: (k: string) => string) => [
 
 const serviceCategories = (t: (k: string) => string) => [
   {
-    key: "massage",
-    label: t("services.massage_label"),
+    key: "massage", label: t("services.massage_label"),
     count: `${massageServices.length} ${t("nav.massage").toLowerCase()}`,
     img: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
     href: "#massage-list",
   },
   {
-    key: "sauna",
-    label: t("services.sauna_label"),
+    key: "sauna", label: t("services.sauna_label"),
     count: `${saunaServices.length} ${t("nav.sauna").toLowerCase()}`,
     img: "https://images.unsplash.com/photo-1712659604528-b179a3634560?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
     href: "#sauna-list",
   },
   {
-    key: "body-care",
-    label: t("services.bodycare_label"),
+    key: "body-care", label: t("services.bodycare_label"),
     count: t("services.bodycare_count"),
     img: "https://images.unsplash.com/photo-1597010804526-2fcb8a09865b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
     href: "#body-care",
   },
   {
-    key: "programs",
-    label: t("services.programs_label"),
+    key: "programs", label: t("services.programs_label"),
     count: `${spaProgramsBase.length} ${t("nav.programs").toLowerCase()}`,
     img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
     href: "#programs",
   },
   {
-    key: "promos",
-    label: t("services.promos_label"),
+    key: "promos", label: t("services.promos_label"),
     count: `${promosDiscounts.length} ${t("nav.promos").toLowerCase()}`,
     img: "https://images.unsplash.com/photo-1781736363509-a2327b675a03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
     href: "#promos",
   },
   {
-    key: "pricing",
-    label: t("services.pricing_label"),
+    key: "pricing", label: t("services.pricing_label"),
     count: t("services.sauna_count"),
     img: "https://hercules-cdn.com/file_BY7zaTrcX6sXhWt74rdo6eGU",
     href: "#pricing",
@@ -289,23 +283,48 @@ export default function Index() {
       {/* HERO */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1716467195935-2d798a043fef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1920" alt="Lotus Spa" className="w-full h-full object-cover" />
+          <img
+            src="https://images.unsplash.com/photo-1716467195935-2d798a043fef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1920"
+            alt="Lotus Spa"
+            className="w-full h-full object-cover"
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-[oklch(0.965_0.008_70)]/95" />
         </div>
         <div className="relative z-10 text-center px-4 max-w-2xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.3, ease: [0.25, 0.1, 0.25, 1] as const }}>
-            <motion.p initial={{ opacity: 0, letterSpacing: "0.15em" }} animate={{ opacity: 1, letterSpacing: "0.45em" }} transition={{ delay: 0.3, duration: 1.1 } as const} className="text-white/55 text-[10px] uppercase mb-6 font-sans font-light">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.3, ease: [0.25, 0.1, 0.25, 1] as const }}
+          >
+            <motion.p
+              initial={{ opacity: 0, letterSpacing: "0.15em" }}
+              animate={{ opacity: 1, letterSpacing: "0.45em" }}
+              transition={{ delay: 0.3, duration: 1.1 } as const}
+              className="text-white/55 text-[10px] uppercase mb-6 font-sans font-light"
+            >
               {t("hero.subtitle")}
             </motion.p>
-            <h1 className="font-sans text-[4.5rem] md:text-[7.5rem] font-thin text-white leading-none tracking-widest mb-4">Lotus Spa</h1>
-            <p className="text-white/55 text-sm font-light tracking-[0.3em] uppercase mb-12 font-sans">{t("hero.tagline")}</p>
+            <h1 className="font-sans text-[4.5rem] md:text-[7.5rem] font-thin text-white leading-none tracking-widest mb-4">
+              Lotus Spa
+            </h1>
+            <p className="text-white/55 text-sm font-light tracking-[0.3em] uppercase mb-12 font-sans">
+              {t("hero.tagline")}
+            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="bg-white text-neutral-900 px-10 py-3.5 rounded-full text-xs font-medium tracking-[0.2em] uppercase hover:bg-white/92 transition-all cursor-pointer font-sans">{t("hero.cta_book")}</a>
-              <a href={TEL_HREF} className="border border-white/50 text-white px-10 py-3.5 rounded-full text-xs font-light tracking-[0.2em] uppercase hover:bg-white/10 transition-all cursor-pointer font-sans">{PHONE}</a>
+              <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="bg-white text-neutral-900 px-10 py-3.5 rounded-full text-xs font-medium tracking-[0.2em] uppercase hover:bg-white/92 transition-all cursor-pointer font-sans">
+                {t("hero.cta_book")}
+              </a>
+              <a href={TEL_HREF} className="border border-white/50 text-white px-10 py-3.5 rounded-full text-xs font-light tracking-[0.2em] uppercase hover:bg-white/10 transition-all cursor-pointer font-sans">
+                {PHONE}
+              </a>
             </div>
           </motion.div>
         </div>
-        <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2" animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 2.5 } as const}>
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2.5 } as const}
+        >
           <ChevronDown className="w-5 h-5 text-white/35" />
         </motion.div>
       </section>
@@ -332,7 +351,15 @@ export default function Index() {
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {serviceCategories(t).map((cat, i) => (
-              <motion.a key={cat.key} href={cat.href} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07, duration: 0.5 } as const} viewport={{ once: true }} className="group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer block">
+              <motion.a
+                key={cat.key}
+                href={cat.href}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.07, duration: 0.5 } as const}
+                viewport={{ once: true }}
+                className="group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer block"
+              >
                 <img src={cat.img} alt={cat.label} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-black/45 group-hover:bg-black/35 transition-colors duration-500" />
                 <div className="absolute top-5 left-5 right-10">
@@ -357,11 +384,20 @@ export default function Index() {
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {massageServices.map((card, i) => (
-              <motion.div key={card.key} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07, duration: 0.5 } as const} viewport={{ once: true }} className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
+              <motion.div
+                key={card.key}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.07, duration: 0.5 } as const}
+                viewport={{ once: true }}
+                className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow"
+              >
                 <Link to={`/service/${card.key}`} className="block cursor-pointer">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img src={card.img} alt={card.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                    {card.tag && <span className="absolute top-3 left-3 text-[10px] font-semibold bg-primary/90 text-primary-foreground px-3 py-1 rounded-full font-sans tracking-wider uppercase">{card.tag}</span>}
+                    {card.tag && (
+                      <span className="absolute top-3 left-3 text-[10px] font-semibold bg-primary/90 text-primary-foreground px-3 py-1 rounded-full font-sans tracking-wider uppercase">{card.tag}</span>
+                    )}
                   </div>
                 </Link>
                 <div className="p-5">
@@ -377,9 +413,15 @@ export default function Index() {
                     ))}
                   </div>
                   <div className="flex items-center gap-2">
-                    <a href={TEL_HREF} className="flex items-center gap-1.5 border border-border text-foreground/70 px-3.5 py-2 rounded-full text-xs font-medium hover:border-primary hover:text-primary transition-all cursor-pointer font-sans"><Phone className="w-3 h-3" /> {t("massage.call")}</a>
-                    <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-primary text-primary-foreground px-3.5 py-2 rounded-full text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer font-sans"><CalendarCheck className="w-3 h-3" /> {t("massage.book")}</a>
-                    <Link to={`/service/${card.key}`} className="ml-auto text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer font-sans flex items-center gap-1">{t("massage.more")} <ArrowRight className="w-3 h-3" /></Link>
+                    <a href={TEL_HREF} className="flex items-center gap-1.5 border border-border text-foreground/70 px-3.5 py-2 rounded-full text-xs font-medium hover:border-primary hover:text-primary transition-all cursor-pointer font-sans">
+                      <Phone className="w-3 h-3" /> {t("massage.call")}
+                    </a>
+                    <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-primary text-primary-foreground px-3.5 py-2 rounded-full text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer font-sans">
+                      <CalendarCheck className="w-3 h-3" /> {t("massage.book")}
+                    </a>
+                    <Link to={`/service/${card.key}`} className="ml-auto text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer font-sans flex items-center gap-1">
+                      {t("massage.more")} <ArrowRight className="w-3 h-3" />
+                    </Link>
                   </div>
                 </div>
               </motion.div>
@@ -397,11 +439,20 @@ export default function Index() {
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {saunaServices.map((item, i) => (
-              <motion.div key={item.key} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1, duration: 0.5 } as const} viewport={{ once: true }} className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
+              <motion.div
+                key={item.key}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1, duration: 0.5 } as const}
+                viewport={{ once: true }}
+                className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow"
+              >
                 <Link to={`/service/${item.key}`} className="block cursor-pointer">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img src={item.img} alt={item.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                    {item.tag && <span className="absolute top-3 left-3 text-[10px] font-semibold bg-primary/90 text-primary-foreground px-3 py-1 rounded-full font-sans tracking-wider uppercase">{item.tag}</span>}
+                    {item.tag && (
+                      <span className="absolute top-3 left-3 text-[10px] font-semibold bg-primary/90 text-primary-foreground px-3 py-1 rounded-full font-sans tracking-wider uppercase">{item.tag}</span>
+                    )}
                   </div>
                 </Link>
                 <div className="p-5">
@@ -411,8 +462,12 @@ export default function Index() {
                   </Link>
                   <p className="text-muted-foreground text-xs font-sans font-light leading-relaxed mb-4">{t(`service.${item.key}.shortDesc`)}</p>
                   <div className="flex items-center gap-2">
-                    <a href={TEL_HREF} className="flex items-center gap-1.5 border border-border text-foreground/70 px-3.5 py-2 rounded-full text-xs font-medium hover:border-primary hover:text-primary transition-all cursor-pointer font-sans"><Phone className="w-3 h-3" /> {t("massage.call")}</a>
-                    <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-primary text-primary-foreground px-3.5 py-2 rounded-full text-xs font-medium hover:opacity-90 cursor-pointer font-sans"><CalendarCheck className="w-3 h-3" /> {t("massage.book")}</a>
+                    <a href={TEL_HREF} className="flex items-center gap-1.5 border border-border text-foreground/70 px-3.5 py-2 rounded-full text-xs font-medium hover:border-primary hover:text-primary transition-all cursor-pointer font-sans">
+                      <Phone className="w-3 h-3" /> {t("massage.call")}
+                    </a>
+                    <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-primary text-primary-foreground px-3.5 py-2 rounded-full text-xs font-medium hover:opacity-90 cursor-pointer font-sans">
+                      <CalendarCheck className="w-3 h-3" /> {t("massage.book")}
+                    </a>
                   </div>
                 </div>
               </motion.div>
@@ -452,7 +507,7 @@ export default function Index() {
                 <div key={i} className="text-center">
                   <div className="font-sans text-sm font-medium mb-1">{t(`parka.item.${i}.name`)}</div>
                   <div className="text-xs text-muted-foreground mb-2 font-sans">{s.duration}</div>
-                  <div className="font-sans text-xl text-primary">{s.price} <span className="text-xs font-normal">{t("bodycare.sum")}</span></div>
+                  <div className="font-sans text-xl text-primary">{s.price} <span className="text-xs font-sans font-normal">{t("bodycare.sum")}</span></div>
                 </div>
               ))}
             </div>
@@ -537,7 +592,7 @@ export default function Index() {
                 {branch.sauna[dayType].map((row) => (
                   <div key={row.time} className="flex items-center justify-between py-3 border-b border-border last:border-0">
                     <div className="flex items-center gap-2"><Clock className="w-3.5 h-3.5 text-muted-foreground" /><span className="text-sm font-sans">{row.time}</span></div>
-                    <span className="font-sans text-primary text-base">{row.price} <span className="text-xs font-normal text-muted-foreground">{t("bodycare.sum")}</span></span>
+                    <span className="font-sans text-primary text-base">{row.price} <span className="text-xs font-sans font-normal text-muted-foreground">{t("bodycare.sum")}</span></span>
                   </div>
                 ))}
               </div>
@@ -552,7 +607,7 @@ export default function Index() {
                   {branch.vip[dayType].map((row) => (
                     <div key={row.time} className="flex items-center justify-between py-3 border-b border-border last:border-0">
                       <div className="flex items-center gap-2"><Clock className="w-3.5 h-3.5 text-muted-foreground" /><span className="text-sm font-sans">{row.time}</span></div>
-                      <span className="font-sans text-accent text-base">{row.price} <span className="text-xs font-normal text-muted-foreground">{t("bodycare.sum")}</span></span>
+                      <span className="font-sans text-accent text-base">{row.price} <span className="text-xs font-sans font-normal text-muted-foreground">{t("bodycare.sum")}</span></span>
                     </div>
                   ))}
                 </div>
@@ -609,13 +664,25 @@ export default function Index() {
           </motion.div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
             {branchMaps.map((maps, i) => (
-              <motion.a key={i} href={maps} target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 } as const} viewport={{ once: true }} className="group bg-card border border-border rounded-2xl p-6 hover:border-primary/40 hover:shadow-md transition-all cursor-pointer block">
+              <motion.a
+                key={i}
+                href={maps}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.08 } as const}
+                viewport={{ once: true }}
+                className="group bg-card border border-border rounded-2xl p-6 hover:border-primary/40 hover:shadow-md transition-all cursor-pointer block"
+              >
                 <div className="w-10 h-10 bg-primary/8 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
                   <MapPin className="w-4 h-4 text-primary" />
                 </div>
                 <h3 className="font-sans text-xl mb-1 group-hover:text-primary transition-colors">{t(`branches.${i}.name`)}</h3>
                 <p className="text-muted-foreground text-xs font-sans mb-3">{t(`branches.${i}.address`)}</p>
-                <span className="text-[10px] font-sans text-primary/70 tracking-widest uppercase group-hover:text-primary transition-colors">{t("branches.open_map")}</span>
+                <span className="text-[10px] font-sans text-primary/70 tracking-widest uppercase group-hover:text-primary transition-colors">
+                  {t("branches.open_map")}
+                </span>
               </motion.a>
             ))}
           </div>
@@ -623,8 +690,12 @@ export default function Index() {
             <h3 className="font-sans text-4xl font-light mb-2">{t("cta.title")}</h3>
             <p className="text-white/80 mb-8 font-sans font-light text-xs tracking-widest uppercase">{t("cta.subtitle")}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href={TEL_HREF} className="flex items-center justify-center gap-2 bg-transparent border border-white/40 text-white px-8 py-3.5 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/10 transition-all cursor-pointer"><Phone className="w-3.5 h-3.5" /> {PHONE}</a>
-              <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white text-neutral-900 px-8 py-3.5 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/90 transition-all cursor-pointer"><CalendarCheck className="w-3.5 h-3.5" /> {t("cta.telegram")}</a>
+              <a href={TEL_HREF} className="flex items-center justify-center gap-2 bg-transparent border border-white/40 text-white px-8 py-3.5 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/10 transition-all cursor-pointer">
+                <Phone className="w-3.5 h-3.5" /> {PHONE}
+              </a>
+              <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white text-neutral-900 px-8 py-3.5 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/90 transition-all cursor-pointer">
+                <CalendarCheck className="w-3.5 h-3.5" /> {t("cta.telegram")}
+              </a>
             </div>
           </motion.div>
         </div>
@@ -641,9 +712,15 @@ export default function Index() {
             </div>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-5 text-xs text-muted-foreground font-sans">
-            <a href={TEL_HREF} className="flex items-center gap-2 hover:text-foreground transition-colors cursor-pointer"><Phone className="w-3.5 h-3.5" /> {PHONE}</a>
-            <a href="https://instagram.com/lotus_spa.uz" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors cursor-pointer">Instagram: {INSTAGRAM}</a>
-            <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors cursor-pointer">Telegram: @spalotus01</a>
+            <a href={TEL_HREF} className="flex items-center gap-2 hover:text-foreground transition-colors cursor-pointer">
+              <Phone className="w-3.5 h-3.5" /> {PHONE}
+            </a>
+            <a href="https://instagram.com/lotus_spa.uz" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors cursor-pointer">
+              Instagram: {INSTAGRAM}
+            </a>
+            <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors cursor-pointer">
+              Telegram: @spalotus01
+            </a>
           </div>
           <div className="text-[11px] text-muted-foreground font-sans">{t("footer.rights", { year: new Date().getFullYear() })}</div>
         </div>
