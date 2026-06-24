@@ -6,5 +6,5 @@ Disallow: /auth/
 Disallow: /auth/callback
 
 # Sitemap
-Sitemap: https://lotus-spa.uz/sitemap.xml
-Sitemap: https://www.lotus-spa.uz/sitemap.xml
+Sitemap: https://lotusspa.uz/sitemap.xml
+Sitemap: https://www.lotusspa.uz/sitemap.xml
