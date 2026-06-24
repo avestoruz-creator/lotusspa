@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Disallow admin/callback pages
+Disallow: /auth/
+Disallow: /auth/callback
+
+# Sitemap
+Sitemap: https://lotus-spa.uz/sitemap.xml
+Sitemap: https://www.lotus-spa.uz/sitemap.xml
