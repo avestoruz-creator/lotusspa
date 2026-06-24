@@ -5,10 +5,10 @@
 >
   <!-- Homepage RU -->
   <url>
-    <loc>https://lotus-spa.uz/ru</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru"/>
+    <loc>https://lotusspa.uz/ru</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -16,10 +16,10 @@
 
   <!-- Homepage UZ -->
   <url>
-    <loc>https://lotus-spa.uz/uz</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru"/>
+    <loc>https://lotusspa.uz/uz</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -27,64 +27,64 @@
 
   <!-- Service pages RU -->
   <url>
-    <loc>https://lotus-spa.uz/ru/service/klassik</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru/service/klassik"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz/service/klassik"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru/service/klassik"/>
+    <loc>https://lotusspa.uz/ru/service/klassik</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru/service/klassik"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz/service/klassik"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru/service/klassik"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lotus-spa.uz/ru/service/aroma</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru/service/aroma"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz/service/aroma"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru/service/aroma"/>
+    <loc>https://lotusspa.uz/ru/service/aroma</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru/service/aroma"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz/service/aroma"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru/service/aroma"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lotus-spa.uz/ru/service/ozdor</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru/service/ozdor"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz/service/ozdor"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru/service/ozdor"/>
+    <loc>https://lotusspa.uz/ru/service/ozdor</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru/service/ozdor"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz/service/ozdor"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru/service/ozdor"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lotus-spa.uz/ru/service/sport</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru/service/sport"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz/service/sport"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru/service/sport"/>
+    <loc>https://lotusspa.uz/ru/service/sport</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru/service/sport"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz/service/sport"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru/service/sport"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lotus-spa.uz/ru/service/bal</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru/service/bal"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz/service/bal"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru/service/bal"/>
+    <loc>https://lotusspa.uz/ru/service/bal</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru/service/bal"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz/service/bal"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru/service/bal"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lotus-spa.uz/ru/service/sauna</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru/service/sauna"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz/service/sauna"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru/service/sauna"/>
+    <loc>https://lotusspa.uz/ru/service/sauna</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru/service/sauna"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz/service/sauna"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru/service/sauna"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lotus-spa.uz/ru/service/hammam</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru/service/hammam"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz/service/hammam"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru/service/hammam"/>
+    <loc>https://lotusspa.uz/ru/service/hammam</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru/service/hammam"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz/service/hammam"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru/service/hammam"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -92,64 +92,64 @@
 
   <!-- Service pages UZ -->
   <url>
-    <loc>https://lotus-spa.uz/uz/service/klassik</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru/service/klassik"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz/service/klassik"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru/service/klassik"/>
+    <loc>https://lotusspa.uz/uz/service/klassik</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru/service/klassik"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz/service/klassik"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru/service/klassik"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lotus-spa.uz/uz/service/aroma</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru/service/aroma"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz/service/aroma"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru/service/aroma"/>
+    <loc>https://lotusspa.uz/uz/service/aroma</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru/service/aroma"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz/service/aroma"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru/service/aroma"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lotus-spa.uz/uz/service/ozdor</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru/service/ozdor"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz/service/ozdor"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru/service/ozdor"/>
+    <loc>https://lotusspa.uz/uz/service/ozdor</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru/service/ozdor"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz/service/ozdor"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru/service/ozdor"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lotus-spa.uz/uz/service/sport</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru/service/sport"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz/service/sport"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru/service/sport"/>
+    <loc>https://lotusspa.uz/uz/service/sport</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru/service/sport"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz/service/sport"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru/service/sport"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lotus-spa.uz/uz/service/bal</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru/service/bal"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz/service/bal"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru/service/bal"/>
+    <loc>https://lotusspa.uz/uz/service/bal</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru/service/bal"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz/service/bal"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru/service/bal"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lotus-spa.uz/uz/service/sauna</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru/service/sauna"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz/service/sauna"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru/service/sauna"/>
+    <loc>https://lotusspa.uz/uz/service/sauna</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru/service/sauna"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz/service/sauna"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru/service/sauna"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lotus-spa.uz/uz/service/hammam</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://lotus-spa.uz/ru/service/hammam"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://lotus-spa.uz/uz/service/hammam"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotus-spa.uz/ru/service/hammam"/>
+    <loc>https://lotusspa.uz/uz/service/hammam</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://lotusspa.uz/ru/service/hammam"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://lotusspa.uz/uz/service/hammam"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lotusspa.uz/ru/service/hammam"/>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
