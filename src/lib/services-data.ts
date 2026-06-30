@@ -14,7 +14,7 @@ export const IMG = {
   silovoy:     "https://images.unsplash.com/photo-1745327883508-b6cd32e5dde5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
   akvamuylny:  "/images/akvamuylny.jpg",
   sauna:       "/images/gallery/sauna.webp",
-  saunaVip:    "/images/gallery/sauna 2.webp",
+  saunaVip:    "/images/gallery/sauna-vip.jpg",
   hammam:      "/images/gallery/xammam-2.webp",
   scrub:       "/images/scrub.jpg",
   piling:      "/images/piling.jpg",
