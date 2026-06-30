@@ -124,7 +124,7 @@ const galleryItems = [
   { src: "/images/gallery/billiard-2.webp", cat: "billiard", labelRu: "Профессиональный бильярд", labelUz: "Professional bilyard" },
   { src: "/images/gallery/billard.webp", cat: "billiard", labelRu: "Бильярдный стол", labelUz: "Bilyard stoli" },
   { src: "/images/gallery/komnata-otdyxa.webp", cat: "rest", labelRu: "Комната отдыха", labelUz: "Dam olish xonasi" },
-  { src: "/images/gallery/komnata-otdyx.webp", cat: "rest", labelRu: "Уютная спальня", labelUz: "Qulay yotoqxona" },
+  { src: "/images/gallery/komnata-otdyx.webp", cat: "billiard", labelRu: "Бильярдная", labelUz: "Bilyard xonasi" },
   { src: "/images/gallery/konmanat-otdyxa.webp", cat: "rest", labelRu: "Зона для релакса", labelUz: "Relaks xonasi" },
   { src: "/images/gallery/komanat-otdixa.webp", cat: "rest", labelRu: "Комната отдыха VIP", labelUz: "Dam olish xonasi VIP" },
   { src: "/images/gallery/garderob.webp", cat: "general", labelRu: "Гардеробная", labelUz: "Kiyinish xonasi" },
