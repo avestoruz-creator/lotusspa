@@ -154,7 +154,7 @@ const serviceCategories = (t: (k: string) => string) => [
     key: "pricing",
     label: t("services.pricing_label"),
     count: t("services.sauna_count"),
-    img: "https://hercules-cdn.com/file_BY7zaTrcX6sXhWt74rdo6eGU",
+    img: "/images/gallery/reception.webp",
     href: "#pricing",
   },
 ];
