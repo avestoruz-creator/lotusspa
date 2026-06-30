@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "./components/providers/theme.tsx";
 import { QueryClientProvider } from "./components/providers/query-client.tsx";
@@ -6,9 +6,10 @@ import { Toaster } from "./components/ui/sonner.tsx";
 import LocaleWrapper from "./components/providers/locale-wrapper.tsx";
 import { SAVED_OR_DEFAULT_LOCALE, setLocaleInPath } from "./i18n";
 import "./i18n";
-import Index from "./pages/Index.tsx";
-import ServicePage from "./pages/service/page.tsx";
-import NotFound from "./pages/NotFound.tsx";
+
+const Index = lazy(() => import("./pages/Index.tsx"));
+const ServicePage = lazy(() => import("./pages/service/page.tsx"));
+const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 export default function App() {
   return (

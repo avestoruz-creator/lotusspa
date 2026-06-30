@@ -3,22 +3,22 @@
 export const PHONE      = "+998 71 205 95 65";
 export const TEL_HREF   = "tel:+998712059565";
 export const TG_LINK    = "https://t.me/spalotus01";
-export const LOGO_URL   = "https://hercules-cdn.com/file_fy8O5ShjsbsxHlV2zjafjcq3";
+export const LOGO_URL   = "/images/logo.png";
 export const INSTAGRAM  = "@lotus_spa.uz";
 
 export const IMG = {
   hero:        "https://images.unsplash.com/photo-1716467195935-2d798a043fef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=1400",
   klassik:     "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
-  aroma:       "https://hercules-cdn.com/file_1gD2h5Ny2HjGM83yecBJ87Q7",
+  aroma:       "/images/aroma.jpg",
   ozdor:       "https://images.unsplash.com/photo-1639162906614-0603b0ae95fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
   silovoy:     "https://images.unsplash.com/photo-1745327883508-b6cd32e5dde5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
-  akvamuylny:  "https://hercules-cdn.com/file_IZZLHeqzpZ9H0KVD2OGdQD8v",
-  sauna:       "https://hercules-cdn.com/file_BY7zaTrcX6sXhWt74rdo6eGU",
-  saunaVip:    "https://images.unsplash.com/photo-1585815157396-ad62043f721b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
-  hammam:      "https://hercules-cdn.com/file_u6pPawZhMo0akIm9iPpZSpME",
-  scrub:       "https://hercules-cdn.com/file_2M7TuEyTZ1r66M3xfR6jDel0",
-  piling:      "https://hercules-cdn.com/file_9OAJyNDN86zM9CALz3bLMIUR",
-  foam:        "https://hercules-cdn.com/file_nrBh0WbzAM4ixhASfnBBNK33",
+  akvamuylny:  "/images/akvamuylny.jpg",
+  sauna:       "/images/gallery/sauna.webp",
+  saunaVip:    "/images/gallery/sauna 2.webp",
+  hammam:      "/images/gallery/xammam-2.webp",
+  scrub:       "/images/scrub.jpg",
+  piling:      "/images/piling.jpg",
+  foam:        "/images/foam.jpg",
 };
 
 export type ServicePrice = { label: string; price: string };

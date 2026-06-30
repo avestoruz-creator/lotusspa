@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Phone, MapPin, Clock, Users, Star, ChevronDown, CalendarCheck, ArrowRight } from "lucide-react";
+import { Phone, MapPin, Clock, Users, Star, ChevronDown, CalendarCheck, ArrowRight, Play } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SUPPORTED_LOCALES, type SupportedLocale, setLocaleInPath } from "@/i18n";
@@ -113,6 +113,23 @@ const parkaPrices = [
   { duration: "30 min", price: "280 000" },
 ];
 
+type GalleryCategory = "all" | "pools" | "rest" | "billiard" | "general";
+
+const galleryItems = [
+  { src: "/images/gallery/reception.webp", cat: "general", labelRu: "Ресепшн", labelUz: "Resepshn" },
+  { src: "/images/gallery/reception-1.webp", cat: "general", labelRu: "Входная зона", labelUz: "Kutish zonasi" },
+  { src: "/images/gallery/basseyn.webp", cat: "pools", labelRu: "Большой бассейн", labelUz: "Katta basseyn" },
+  { src: "/images/gallery/kupel-basseyn.webp", cat: "pools", labelRu: "Купель с бассейном", labelUz: "Kupel va basseyn" },
+  { src: "/images/gallery/billiard-1.webp", cat: "billiard", labelRu: "Бильярдная комната", labelUz: "Bilyard xonasi" },
+  { src: "/images/gallery/billiard-2.webp", cat: "billiard", labelRu: "Профессиональный бильярд", labelUz: "Professional bilyard" },
+  { src: "/images/gallery/billard.webp", cat: "billiard", labelRu: "Бильярдный стол", labelUz: "Bilyard stoli" },
+  { src: "/images/gallery/komnata-otdyxa.webp", cat: "rest", labelRu: "Комната отдыха", labelUz: "Dam olish xonasi" },
+  { src: "/images/gallery/komnata-otdyx.webp", cat: "rest", labelRu: "Уютная спальня", labelUz: "Qulay yotoqxona" },
+  { src: "/images/gallery/konmanat-otdyxa.webp", cat: "rest", labelRu: "Зона для релакса", labelUz: "Relaks xonasi" },
+  { src: "/images/gallery/komanat-otdixa.webp", cat: "rest", labelRu: "Комната отдыха VIP", labelUz: "Dam olish xonasi VIP" },
+  { src: "/images/gallery/garderob.webp", cat: "general", labelRu: "Гардеробная", labelUz: "Kiyinish xonasi" },
+] satisfies { src: string; cat: GalleryCategory; labelRu: string; labelUz: string }[];
+
 const whyUs = (t: (k: string) => string) => [
   { icon: Star,  title: t("why.masters"),  desc: t("why.masters_desc") },
   { icon: Users, title: t("why.approach"), desc: t("why.approach_desc") },
@@ -166,36 +183,39 @@ const serviceCategories = (t: (k: string) => string) => [
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function VideoCard({ videoId }: { videoId: string }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.5 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  const src = isVisible
-    ? `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=1&rel=0&playsinline=1`
-    : "";
-
-  return (
-    <div ref={containerRef} className="rounded-2xl overflow-hidden aspect-[9/16] bg-muted">
-      {src && (
+  if (isPlaying) {
+    return (
+      <div className="rounded-2xl overflow-hidden aspect-[9/16] bg-black">
         <iframe
-          src={src}
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&loop=1&playlist=${videoId}&controls=1&rel=0&playsinline=1`}
           className="w-full h-full"
           allow="autoplay; fullscreen"
           allowFullScreen
-          loading="lazy"
           title={`Lotus Spa video ${videoId}`}
         />
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      onClick={() => setIsPlaying(true)}
+      className="group relative rounded-2xl overflow-hidden aspect-[9/16] bg-muted cursor-pointer select-none"
+    >
+      <img
+        src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+        alt="Lotus Spa Video Preview"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300" />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 text-black">
+          <Play className="w-6 h-6 fill-current translate-x-0.5" />
+        </div>
+      </div>
     </div>
   );
 }
@@ -226,6 +246,7 @@ function Label({ children, light = false }: { children: React.ReactNode; light?:
 export default function Index() {
   const [activeBranch, setActiveBranch] = useState<Branch>("karasaray");
   const [dayType, setDayType]           = useState<DayType>("weekday");
+  const [galleryFilter, setGalleryFilter] = useState<GalleryCategory>("all");
   const branch = pricingData[activeBranch];
   const { t } = useTranslation("common");
   const { lng } = useParams<{ lng: string }>();
@@ -437,7 +458,7 @@ export default function Index() {
                   <div className="flex flex-wrap gap-2 mb-4">
                     {card.prices.map((p) => (
                       <div key={p.label} className="text-xs font-sans text-muted-foreground">
-                        {p.label} {t("bodycare.min")} <span className="text-primary font-medium">// {p.price} so'm</span>
+                        {p.label} {t("bodycare.min")} <span className="text-primary font-medium">// {p.price} {t("bodycare.sum")}</span>
                       </div>
                     ))}
                   </div>
@@ -706,6 +727,63 @@ export default function Index() {
             </ul>
           </div>
           <ActionButtons />
+        </div>
+      </section>
+
+      {/* ── GALLERY ── */}
+      <section id="gallery" className="py-20 px-4 bg-background">
+        <div className="max-w-5xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
+            <Label>{t("gallery.label")}</Label>
+            <h2 className="font-sans text-5xl font-light">{t("gallery.title")}</h2>
+          </motion.div>
+
+          {/* Filter Categories */}
+          <div className="flex flex-wrap gap-2.5 mb-10">
+            {(["all", "pools", "rest", "billiard", "general"] as const).map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setGalleryFilter(cat)}
+                className={`px-5 py-2.5 rounded-full text-xs font-medium transition-all cursor-pointer font-sans tracking-wider uppercase ${
+                  galleryFilter === cat
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-card border border-border hover:border-primary/40 text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {t(`gallery.cat.${cat === "all" ? "all" : cat === "general" ? "reception" : cat === "pools" ? "pools" : cat === "billiard" ? "billiard" : "rest"}`)}
+              </button>
+            ))}
+          </div>
+
+          {/* Grid of Images */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {galleryItems
+              .filter((item) => galleryFilter === "all" || item.cat === galleryFilter)
+              .map((item) => (
+                <motion.div
+                  key={item.src}
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  className="group relative rounded-2xl overflow-hidden aspect-[4/3] bg-muted shadow-sm border border-border"
+                >
+                  <img
+                    src={item.src}
+                    alt={lng === "uz" ? item.labelUz : item.labelRu}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                  {/* Hover overlay and label */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p className="font-sans text-white text-xs font-light tracking-wider">
+                      {lng === "uz" ? item.labelUz : item.labelRu}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+          </div>
         </div>
       </section>
 

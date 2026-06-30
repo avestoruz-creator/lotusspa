@@ -188,7 +188,7 @@
 
   "service.sauna.title": "Klassik sauna",
   "service.sauna.subtitle": "Fin banyasi",
-  "service.sauna.shortDesc": "90°C gacha quruq issiqlik, xushbo'y daraxt shoxlari va organizmning to'liq tiklanishi.",
+  "service.sauna.shortDesc": "90°C gacha quruq issiqlik — chuqur tozalanish va organizmning to'liq tiklanishi.",
   "service.sauna.fullDesc": "Fin saunasi — issiqlik orqali sog'lomlashtirish san'ati. Bizning klassik saunamizda 80–90°C harorat past namlik bilan saqlanadi, bu esa maksimal ter ajralishi va g'ovaklar chuqur tozalanishini ta'minlaydi.\n\nSaunaga muntazam tashrif buyurish immunitetni mustahkamlaydi, yurak-tomir tizimi ishini yaxshilaydi, zaharlarni chiqaradi va stressni kamaytiradi.",
   "service.sauna.detail.0": "80–90°C harorat, past namlik",
   "service.sauna.detail.1": "Teri va g'ovaklarning chuqur tozalanishi",
@@ -211,5 +211,13 @@
   "service.hammam.detail.0": "40–50°C nam bug'",
   "service.hammam.detail.1": "An'anaviy marmar taxta",
   "service.hammam.detail.2": "Klassik sharq tozalash rituali",
-  "service.hammam.detail.3": "Kuchli issiqlikka chidamaydigan insonlar uchun ideal"
+  "service.hammam.detail.3": "Kuchli issiqlikka chidamaydigan insonlar uchun ideal",
+
+  "gallery.label": "Fotogalereya",
+  "gallery.title": "bizning interyer",
+  "gallery.cat.all": "Barchasi",
+  "gallery.cat.reception": "Resepshn va Kiyinish xonasi",
+  "gallery.cat.pools": "Basseynlar",
+  "gallery.cat.billiard": "Bilyard",
+  "gallery.cat.rest": "Dam olish xonalari"
 }
