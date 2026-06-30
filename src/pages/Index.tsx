@@ -25,16 +25,6 @@ const pricingData = {
         { time: "19:00 – 00:00", price: "350 000" }, { time: "00:00 – 04:00", price: "400 000" },
       ],
     },
-    vip: {
-      weekday: [
-        { time: "11:00 – 14:00", price: "250 000" }, { time: "14:00 – 19:00", price: "300 000" },
-        { time: "19:00 – 00:00", price: "400 000" }, { time: "00:00 – 04:00", price: "450 000" },
-      ],
-      weekend: [
-        { time: "11:00 – 14:00", price: "330 000" }, { time: "14:00 – 19:00", price: "380 000" },
-        { time: "19:00 – 00:00", price: "430 000" }, { time: "00:00 – 04:00", price: "480 000" },
-      ],
-    },
     extra: "70 000",
   },
   sergeli: {
@@ -47,16 +37,6 @@ const pricingData = {
       weekend: [
         { time: "11:00 – 14:00", price: "250 000" }, { time: "14:00 – 19:00", price: "290 000" },
         { time: "19:00 – 00:00", price: "340 000" }, { time: "00:00 – 04:00", price: "400 000" },
-      ],
-    },
-    vip: {
-      weekday: [
-        { time: "11:00 – 14:00", price: "250 000" }, { time: "14:00 – 19:00", price: "300 000" },
-        { time: "19:00 – 00:00", price: "350 000" }, { time: "00:00 – 04:00", price: "400 000" },
-      ],
-      weekend: [
-        { time: "11:00 – 14:00", price: "300 000" }, { time: "14:00 – 19:00", price: "350 000" },
-        { time: "19:00 – 00:00", price: "400 000" }, { time: "00:00 – 04:00", price: "450 000" },
       ],
     },
     extra: "60 000",
@@ -73,13 +53,11 @@ const pricingData = {
         { time: "19:00 – 00:00", price: "350 000" }, { time: "00:00 – 04:00", price: "400 000" },
       ],
     },
-    vip: null,
     extra: "70 000",
   },
 } satisfies Record<Branch, {
   name: string;
   sauna: { weekday: { time: string; price: string }[]; weekend: { time: string; price: string }[] };
-  vip: { weekday: { time: string; price: string }[]; weekend: { time: string; price: string }[] } | null;
   extra: string;
 }>;
 
@@ -655,7 +633,7 @@ export default function Index() {
             ))}
           </div>
 
-          <div className={`grid gap-6 ${branch.vip ? "md:grid-cols-2" : "max-w-sm"}`}>
+          <div className="grid gap-6 max-w-md">
             <motion.div key={`${activeBranch}-${dayType}-sauna`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-card border border-border rounded-2xl overflow-hidden">
               <div className="bg-primary text-primary-foreground p-5">
                 <h3 className="font-sans text-xl">{t("pricing.sauna_title")}</h3>
@@ -670,23 +648,6 @@ export default function Index() {
                 ))}
               </div>
             </motion.div>
-
-            {branch.vip && (
-              <motion.div key={`${activeBranch}-${dayType}-vip`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-card border border-accent/25 rounded-2xl overflow-hidden">
-                <div className="bg-accent text-accent-foreground p-5">
-                  <h3 className="font-sans text-xl">{t("pricing.vip_title")}</h3>
-                  <p className="text-white/50 text-xs mt-1 font-sans">{t("pricing.vip_desc")}</p>
-                </div>
-                <div className="p-5">
-                  {branch.vip[dayType].map((row) => (
-                    <div key={row.time} className="flex items-center justify-between py-3 border-b border-border last:border-0">
-                      <div className="flex items-center gap-2"><Clock className="w-3.5 h-3.5 text-muted-foreground" /><span className="text-sm font-sans">{row.time}</span></div>
-                      <span className="font-sans text-accent text-base">{row.price} <span className="text-xs font-sans font-normal text-muted-foreground">{t("bodycare.sum")}</span></span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
           </div>
 
           <div className="mt-5 bg-muted/60 border border-border rounded-xl p-4 flex items-center gap-3 text-sm font-sans">
