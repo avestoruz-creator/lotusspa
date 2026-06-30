@@ -102,15 +102,15 @@ const branchMaps = [
 ];
 
 const bodyCarePrices = [
-  { duration: "20 min", price: "230 000", img: IMG.scrub },
-  { duration: "20 min", price: "200 000", img: IMG.piling },
-  { duration: "20 min", price: "180 000", img: IMG.foam },
+  { duration: "20", price: "230 000", img: IMG.scrub },
+  { duration: "20", price: "200 000", img: IMG.piling },
+  { duration: "20", price: "180 000", img: IMG.foam },
 ];
 
 const parkaPrices = [
-  { duration: "10 min", price: "150 000" },
-  { duration: "15 min", price: "170 000" },
-  { duration: "30 min", price: "280 000" },
+  { duration: "10", price: "150 000" },
+  { duration: "15", price: "170 000" },
+  { duration: "30", price: "280 000" },
 ];
 
 type GalleryCategory = "all" | "pools" | "rest" | "billiard" | "general";
@@ -544,7 +544,7 @@ export default function Index() {
                 <div className="p-5">
                   <div className="font-sans text-lg mb-1">{t(`bodycare.item.${i}.name`)}</div>
                   <div className="flex items-center justify-between text-xs mb-4 font-sans">
-                    <span className="text-muted-foreground">{s.duration}</span>
+                    <span className="text-muted-foreground">{s.duration} {t("bodycare.min")}</span>
                     <span className="text-primary font-medium">{s.price} {t("bodycare.sum")}</span>
                   </div>
                   <ActionButtons />
@@ -560,7 +560,7 @@ export default function Index() {
               {parkaPrices.map((s, i) => (
                 <div key={i} className="text-center">
                   <div className="font-sans text-sm font-medium mb-1">{t(`parka.item.${i}.name`)}</div>
-                  <div className="text-xs text-muted-foreground mb-2 font-sans">{s.duration}</div>
+                  <div className="text-xs text-muted-foreground mb-2 font-sans">{s.duration} {t("bodycare.min")}</div>
                   <div className="font-sans text-xl text-primary">{s.price} <span className="text-xs font-sans font-normal">{t("bodycare.sum")}</span></div>
                 </div>
               ))}
