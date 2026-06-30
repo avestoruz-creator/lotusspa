@@ -106,6 +106,10 @@ const galleryItems = [
   { src: "/images/gallery/konmanat-otdyxa.webp", cat: "rest", labelRu: "Комната отдыха", labelUz: "Dam olish xonasi" },
   { src: "/images/gallery/komanat-otdixa.webp", cat: "rest", labelRu: "Комната отдыха VIP", labelUz: "Dam olish xonasi VIP" },
   { src: "/images/gallery/garderob.webp", cat: "general", labelRu: "Гардеробная", labelUz: "Kiyinish xonasi" },
+  { src: "/images/gallery/hammam-detail-1.jpg", cat: "general", labelRu: "Интерьер хаммама", labelUz: "Hammom interyeri" },
+  { src: "/images/gallery/hammam-detail-2.jpg", cat: "general", labelRu: "Хаммам комната", labelUz: "Hammom xonasi" },
+  { src: "/images/gallery/sauna-detail-1.jpg", cat: "general", labelRu: "Парная сауны", labelUz: "Sauna xonasi" },
+  { src: "/images/gallery/sauna-detail-2.jpg", cat: "general", labelRu: "Интерьер сауны", labelUz: "Sauna interyeri" },
 ] satisfies { src: string; cat: GalleryCategory; labelRu: string; labelUz: string }[];
 
 const whyUs = (t: (k: string) => string) => [
