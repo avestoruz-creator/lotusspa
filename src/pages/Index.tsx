@@ -118,7 +118,7 @@ type GalleryCategory = "all" | "pools" | "rest" | "billiard" | "general";
 const galleryItems = [
   { src: "/images/gallery/reception.webp", cat: "general", labelRu: "Ресепшн", labelUz: "Resepshn" },
   { src: "/images/gallery/reception-1.webp", cat: "general", labelRu: "Входная зона", labelUz: "Kutish zonasi" },
-  { src: "/images/gallery/basseyn.webp", cat: "pools", labelRu: "Большой бассейн", labelUz: "Katta basseyn" },
+  { src: "/images/gallery/basseyn.webp", cat: "pools", labelRu: "Освежающий бассейн", labelUz: "Salqin basseyn" },
   { src: "/images/gallery/kupel-basseyn.webp", cat: "pools", labelRu: "Купель с бассейном", labelUz: "Kupel va basseyn" },
   { src: "/images/gallery/billiard-1.webp", cat: "billiard", labelRu: "Бильярдная комната", labelUz: "Bilyard xonasi" },
   { src: "/images/gallery/billiard-2.webp", cat: "billiard", labelRu: "Профессиональный бильярд", labelUz: "Professional bilyard" },
