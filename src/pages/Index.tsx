@@ -8,6 +8,7 @@ import {
   massageServices, saunaServices, IMG,
   LOGO_URL, PHONE, TEL_HREF, TG_LINK, INSTAGRAM,
 } from "@/lib/services-data.ts";
+import PriceMenuSlider from "@/components/price-menu-slider.tsx";
 
 type Branch  = "karasaray" | "sergeli" | "c1";
 type DayType = "weekday" | "weekend";
@@ -658,6 +659,15 @@ export default function Index() {
             <Users className="w-4 h-4 text-accent shrink-0" />
             <span className="text-muted-foreground text-xs">{t("pricing.extra")} <strong className="text-foreground">{branch.extra} {t("bodycare.sum")} / 1 {t("pricing.per_hour").split(" / 1 ")[1]}</strong></span>
           </div>
+
+          {/* Full service menu / price list of the selected branch (image slider) */}
+          <PriceMenuSlider
+            branches={Object.keys(pricingData) as Branch[]}
+            active={activeBranch}
+            onChange={setActiveBranch}
+            lng={lng === "uz" ? "uz" : "ru"}
+          />
+
           <div className="mt-8"><ActionButtons /></div>
         </div>
       </section>

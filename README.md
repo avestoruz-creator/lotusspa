@@ -45,3 +45,23 @@ Upload the `dist/` folder. Configure server to redirect all 404 → `index.html`
 - Uzbek: `src/locales/uz/common.json`
 
 Add a new language: create `src/locales/<code>/common.json`, add to `SUPPORTED_LOCALES` in `src/i18n.ts`.
+
+## Price list images (section «Цены» → slider)
+
+The full service menu of every branch is shown as an image slider in the pricing section
+(`src/components/price-menu-slider.tsx`). Images are served from `public/images/price/`:
+
+| File | Purpose |
+| --- | --- |
+| `public/images/price/<branch>-<lng>.webp` | 2000 px preview shown in the slider |
+| `public/images/price/full/<branch>-<lng>.jpg` | 4200 px version opened in a new tab / downloaded |
+| `assets/price-source/<branch>-<lng>.jpg` | original 6000 px print files (not served) |
+
+`<branch>` = `karasaray` · `sergeli` · `c1`, `<lng>` = `ru` · `uz`.
+
+To update a price list, replace the source file and regenerate both web versions (ImageMagick):
+
+```bash
+convert assets/price-source/karasaray-ru.jpg -strip -resize 2000x -quality 80 public/images/price/karasaray-ru.webp
+convert assets/price-source/karasaray-ru.jpg -strip -resize 4200x -interlace Plane -quality 82 public/images/price/full/karasaray-ru.jpg
+```
