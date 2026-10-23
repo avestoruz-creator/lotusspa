@@ -1,76 +1,124 @@
 import { motion } from "motion/react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { Phone, MapPin, Clock, Users, Star, ChevronDown, CalendarCheck, ArrowRight, Play } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Phone, MapPin, Clock, Users, Star, ChevronDown, CalendarCheck, ArrowRight, Play, Sparkles } from "lucide-react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SUPPORTED_LOCALES, type SupportedLocale, setLocaleInPath } from "@/i18n";
 import {
   massageServices, saunaServices, IMG,
   LOGO_URL, PHONE, TEL_HREF, TG_LINK, INSTAGRAM,
+  quickRecoveryServices, doubleService, spaProgramsList,
 } from "@/lib/services-data.ts";
-import PriceMenuSlider from "@/components/price-menu-slider.tsx";
+import PriceMenuSlider, { type PriceBranch } from "@/components/price-menu-slider.tsx";
 
-type Branch  = "karasaray" | "sergeli" | "c1";
-type DayType = "weekday" | "weekend";
+export type Branch = "parkent" | "c1" | "aviasozlar" | "sergeli" | "karasaray";
+export type TariffGroupId = "parkent_c1" | "aviasozlar_sergeli" | "karasaray";
+export type DayType = "weekday" | "weekend";
 
-const pricingData = {
-  karasaray: {
-    name: "Карасарай",
-    sauna: {
-      weekday: [
-        { time: "11:00 – 14:00", price: "180 000" }, { time: "14:00 – 19:00", price: "220 000" },
-        { time: "19:00 – 00:00", price: "280 000" }, { time: "00:00 – 04:00", price: "380 000" },
-      ],
-      weekend: [
-        { time: "11:00 – 14:00", price: "250 000" }, { time: "14:00 – 19:00", price: "300 000" },
-        { time: "19:00 – 00:00", price: "350 000" }, { time: "00:00 – 04:00", price: "400 000" },
-      ],
-    },
-    extra: "70 000",
-  },
-  sergeli: {
-    name: "Сергели / Авиасозлар",
-    sauna: {
-      weekday: [
-        { time: "11:00 – 14:00", price: "180 000" }, { time: "14:00 – 19:00", price: "240 000" },
-        { time: "19:00 – 00:00", price: "280 000" }, { time: "00:00 – 04:00", price: "300 000" },
-      ],
-      weekend: [
-        { time: "11:00 – 14:00", price: "250 000" }, { time: "14:00 – 19:00", price: "290 000" },
-        { time: "19:00 – 00:00", price: "340 000" }, { time: "00:00 – 04:00", price: "400 000" },
-      ],
-    },
-    extra: "60 000",
-  },
-  c1: {
-    name: "Ц1 / Паркент",
-    sauna: {
-      weekday: [
-        { time: "11:00 – 14:00", price: "200 000" }, { time: "14:00 – 19:00", price: "250 000" },
-        { time: "19:00 – 00:00", price: "300 000" }, { time: "00:00 – 04:00", price: "350 000" },
-      ],
-      weekend: [
-        { time: "11:00 – 14:00", price: "250 000" }, { time: "14:00 – 19:00", price: "300 000" },
-        { time: "19:00 – 00:00", price: "350 000" }, { time: "00:00 – 04:00", price: "400 000" },
-      ],
-    },
-    extra: "70 000",
-  },
-} satisfies Record<Branch, {
-  name: string;
-  sauna: { weekday: { time: string; price: string }[]; weekend: { time: string; price: string }[] };
+export interface SaunaPriceRow {
+  time: string;
+  price: string;
+}
+
+export interface TariffGroupData {
+  sauna: {
+    weekday: SaunaPriceRow[];
+    weekend: SaunaPriceRow[];
+  };
+  vip: {
+    weekday: SaunaPriceRow[];
+    weekend: SaunaPriceRow[];
+  } | null;
   extra: string;
-}>;
+}
 
-const spaProgramsBase = [
-  { duration: "70", price: "620 000" },
-  { duration: "60", price: "600 000" },
-  { duration: "75", price: "700 000" },
-  { duration: "90", price: "870 000" },
-  { duration: "60", price: "580 000" },
+/** 3 Tariff groups without data duplication */
+const TARIFF_GROUPS: Record<TariffGroupId, TariffGroupData> = {
+  parkent_c1: {
+    sauna: {
+      weekday: [
+        { time: "11:00 – 17:00", price: "220 000" },
+        { time: "17:00 – 23:00", price: "330 000" },
+        { time: "23:00 – 04:00", price: "380 000" },
+      ],
+      weekend: [
+        { time: "11:00 – 17:00", price: "280 000" },
+        { time: "17:00 – 23:00", price: "380 000" },
+        { time: "23:00 – 04:00", price: "430 000" },
+      ],
+    },
+    vip: null,
+    extra: "70 000",
+  },
+  aviasozlar_sergeli: {
+    sauna: {
+      weekday: [
+        { time: "11:00 – 17:00", price: "200 000" },
+        { time: "17:00 – 23:00", price: "300 000" },
+        { time: "23:00 – 04:00", price: "320 000" },
+      ],
+      weekend: [
+        { time: "11:00 – 17:00", price: "270 000" },
+        { time: "17:00 – 23:00", price: "360 000" },
+        { time: "23:00 – 04:00", price: "420 000" },
+      ],
+    },
+    vip: {
+      weekday: [
+        { time: "11:00 – 17:00", price: "270 000" },
+        { time: "17:00 – 23:00", price: "370 000" },
+        { time: "23:00 – 04:00", price: "420 000" },
+      ],
+      weekend: [
+        { time: "11:00 – 17:00", price: "350 000" },
+        { time: "17:00 – 23:00", price: "450 000" },
+        { time: "23:00 – 04:00", price: "500 000" },
+      ],
+    },
+    extra: "70 000",
+  },
+  karasaray: {
+    sauna: {
+      weekday: [
+        { time: "11:00 – 17:00", price: "200 000" },
+        { time: "17:00 – 23:00", price: "300 000" },
+        { time: "23:00 – 04:00", price: "380 000" },
+      ],
+      weekend: [
+        { time: "11:00 – 17:00", price: "270 000" },
+        { time: "17:00 – 23:00", price: "370 000" },
+        { time: "23:00 – 04:00", price: "420 000" },
+      ],
+    },
+    vip: {
+      weekday: [
+        { time: "11:00 – 17:00", price: "270 000" },
+        { time: "17:00 – 23:00", price: "400 000" },
+        { time: "23:00 – 04:00", price: "450 000" },
+      ],
+      weekend: [
+        { time: "11:00 – 17:00", price: "350 000" },
+        { time: "17:00 – 23:00", price: "450 000" },
+        { time: "23:00 – 04:00", price: "500 000" },
+      ],
+    },
+    extra: "70 000",
+  },
+};
+
+export interface BranchConfig {
+  id: Branch;
+  groupId: TariffGroupId;
+  sliderImage: PriceBranch;
+}
+
+const BRANCHES: BranchConfig[] = [
+  { id: "parkent",    groupId: "parkent_c1",        sliderImage: "c1" },
+  { id: "c1",         groupId: "parkent_c1",        sliderImage: "c1" },
+  { id: "aviasozlar", groupId: "aviasozlar_sergeli", sliderImage: "sergeli" },
+  { id: "sergeli",    groupId: "aviasozlar_sergeli", sliderImage: "sergeli" },
+  { id: "karasaray",  groupId: "karasaray",          sliderImage: "karasaray" },
 ];
-
-const promosDiscounts = ["-−20%", "−50%", "2+1", "+Sauna"];
 
 const branchMaps = [
   "https://yandex.ru/maps/org/spa_salon_lotus/142852799852?si=1xkw6vc9febqeq652mmtczg4g0",
@@ -81,15 +129,15 @@ const branchMaps = [
 ];
 
 const bodyCarePrices = [
-  { duration: "20", price: "230 000", img: IMG.scrub },
-  { duration: "20", price: "200 000", img: IMG.piling },
-  { duration: "20", price: "180 000", img: IMG.foam },
+  { duration: "20", price: "250 000", img: IMG.scrub },
+  { duration: "20", price: "250 000", img: IMG.piling },
+  { duration: "15", price: "170 000", img: IMG.foam },
 ];
 
 const parkaPrices = [
-  { duration: "10", price: "150 000" },
-  { duration: "15", price: "170 000" },
-  { duration: "30", price: "280 000" },
+  { duration: "10", price: "180 000" },
+  { duration: "15", price: "200 000" },
+  { duration: "30", price: "300 000" },
 ];
 
 type GalleryCategory = "all" | "pools" | "rest" | "billiard" | "general";
@@ -123,7 +171,7 @@ const serviceCategories = (t: (k: string) => string) => [
   {
     key: "massage",
     label: t("services.massage_label"),
-    count: `${massageServices.length} ${t("services.massage_count_label")}`,
+    count: `${massageServices.filter((s) => !s.hidden).length} ${t("services.massage_count_label")}`,
     img: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
     href: "#massage-list",
   },
@@ -144,16 +192,9 @@ const serviceCategories = (t: (k: string) => string) => [
   {
     key: "programs",
     label: t("services.programs_label"),
-    count: `${spaProgramsBase.length} ${t("services.programs_count_label")}`,
+    count: `${spaProgramsList.filter((p) => !p.hidden).length} ${t("services.programs_count_label")}`,
     img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
     href: "#programs",
-  },
-  {
-    key: "promos",
-    label: t("services.promos_label"),
-    count: `${promosDiscounts.length} ${t("nav.promos").toLowerCase()}`,
-    img: "https://images.unsplash.com/photo-1781736363509-a2327b675a03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=75&w=600",
-    href: "#promos",
   },
   {
     key: "pricing",
@@ -227,16 +268,33 @@ function Label({ children, light = false }: { children: React.ReactNode; light?:
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 export default function Index() {
-  const [activeBranch, setActiveBranch] = useState<Branch>("karasaray");
-  const [dayType, setDayType]           = useState<DayType>("weekday");
+  const [activeBranch, setActiveBranch]   = useState<Branch>("parkent");
+  const [dayType, setDayType]             = useState<DayType>("weekday");
   const [galleryFilter, setGalleryFilter] = useState<GalleryCategory>("all");
-  const branch = pricingData[activeBranch];
+  const branchConfig = BRANCHES.find((b) => b.id === activeBranch) ?? BRANCHES[0];
+  const currentGroup = TARIFF_GROUPS[branchConfig.groupId];
   const { t } = useTranslation("common");
   const { lng } = useParams<{ lng: string }>();
+  const currentLng = lng ?? "ru";
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Scroll to hash section (e.g. #programs) on navigation or hash change
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const timer = setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location.hash]);
 
   const handleLangSwitch = (newLng: SupportedLocale) => {
-    const newPath = setLocaleInPath(newLng, `/${lng ?? "ru"}`);
+    const newPath = setLocaleInPath(newLng, location.pathname, location.search, location.hash);
     navigate(newPath);
   };
 
@@ -246,7 +304,7 @@ export default function Index() {
       {/* ── NAVBAR ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="max-w-6xl mx-auto px-5 py-3.5 flex items-center justify-between gap-4">
-          <Link to="/" className="flex items-center gap-3 shrink-0 cursor-pointer">
+          <Link to={`/${currentLng}`} className="flex items-center gap-3 shrink-0 cursor-pointer">
             <img
               src={LOGO_URL}
               alt="Lotus Spa"
@@ -259,8 +317,8 @@ export default function Index() {
           </Link>
 
           <div className="hidden lg:flex items-center gap-8 text-sm font-light tracking-widest uppercase">
-            {(["#services", "#sauna-list", "#pricing", "#programs", "#promos"] as const).map((href, i) => {
-              const labels = [t("nav.massage"), t("nav.sauna"), t("pricing.label"), t("nav.programs"), t("nav.promos")];
+            {(["#services", "#sauna-list", "#pricing", "#programs"] as const).map((href, i) => {
+              const labels = [t("nav.massage"), t("nav.sauna"), t("pricing.label"), t("nav.programs")];
               return (
                 <a key={href} href={href} className="hover:text-primary transition-colors cursor-pointer text-foreground/55 text-[11px]">{labels[i]}</a>
               );
@@ -413,7 +471,7 @@ export default function Index() {
 
           {/* 3-column grid of cards — like telo.uz "виды массажей" */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {massageServices.map((card, i) => (
+            {massageServices.filter((card) => !card.hidden).map((card, i) => (
               <motion.div
                 key={card.key}
                 initial={{ opacity: 0, y: 20 }}
@@ -422,7 +480,7 @@ export default function Index() {
                 viewport={{ once: true }}
                 className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow"
               >
-                <Link to={`/service/${card.key}`} className="block cursor-pointer">
+                <Link to={`/${currentLng}/service/${card.key}`} className="block cursor-pointer">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img src={card.img} alt={card.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                     {card.tag && (
@@ -433,7 +491,7 @@ export default function Index() {
                   </div>
                 </Link>
                 <div className="p-5">
-                  <Link to={`/service/${card.key}`} className="cursor-pointer">
+                  <Link to={`/${currentLng}/service/${card.key}`} className="cursor-pointer">
                     <h3 className="font-sans text-xl font-normal mb-1.5 hover:text-primary transition-colors">{t(`service.${card.key}.title`)}</h3>
                   </Link>
                   <p className="text-muted-foreground text-xs font-sans font-light leading-relaxed mb-4">{t(`service.${card.key}.shortDesc`)}</p>
@@ -452,13 +510,87 @@ export default function Index() {
                     <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-primary text-primary-foreground px-3.5 py-2 rounded-full text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer font-sans">
                       <CalendarCheck className="w-3 h-3" /> {t("massage.book")}
                     </a>
-                    <Link to={`/service/${card.key}`} className="ml-auto text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer font-sans flex items-center gap-1">
+                    <Link to={`/${currentLng}/service/${card.key}`} className="ml-auto text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer font-sans flex items-center gap-1">
                       {t("massage.more")} <ArrowRight className="w-3 h-3" />
                     </Link>
                   </div>
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* DOUBLE & Quick Recovery */}
+          <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* DOUBLE */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-card border border-border rounded-2xl p-6 flex flex-col justify-between"
+            >
+              <div>
+                <span className="inline-block text-[10px] font-semibold bg-primary/10 text-primary px-3 py-1 rounded-full font-sans tracking-wider uppercase mb-3">
+                  {t("double.badge")}
+                </span>
+                <h3 className="font-sans text-2xl font-light mb-1">{t("double.title")}</h3>
+                <p className="text-muted-foreground text-xs font-sans mb-3">{t("double.subtitle")}</p>
+                <p className="text-foreground/75 text-xs font-sans font-light leading-relaxed mb-6">{t("double.desc")}</p>
+              </div>
+              <div className="flex items-center justify-between pt-4 border-t border-border">
+                <div>
+                  <span className="text-xs text-muted-foreground font-sans">{doubleService.duration} {t("bodycare.min")} // </span>
+                  <span className="text-primary font-medium font-sans">{doubleService.price} {t("bodycare.sum")}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <a href={TEL_HREF} className="p-2 rounded-full border border-border hover:border-primary text-foreground/70 hover:text-primary transition-all cursor-pointer">
+                    <Phone className="w-3.5 h-3.5" />
+                  </a>
+                  <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition-opacity cursor-pointer">
+                    <CalendarCheck className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Quick Recovery */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="lg:col-span-2 bg-card border border-border rounded-2xl p-6"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <p className="text-[10px] text-accent tracking-widest uppercase font-sans mb-1">{t("recovery.label")}</p>
+                  <h3 className="font-sans text-2xl font-light">{t("recovery.title")}</h3>
+                </div>
+                <Sparkles className="w-5 h-5 text-accent opacity-75" />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                {quickRecoveryServices.map((item) => {
+                  const isAddon = item.key === "face" || item.key === "head";
+                  return (
+                    <div key={item.key} className="p-3 rounded-xl bg-muted/40 border border-border/60 flex flex-col justify-between">
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <p className="text-xs font-medium font-sans">{t(`recovery.item.${item.key}`)}</p>
+                          <p className="text-[11px] text-muted-foreground font-sans">{item.duration} {t("bodycare.min")}</p>
+                        </div>
+                        <span className="text-xs text-primary font-medium font-sans shrink-0">{item.price} {t("bodycare.sum")}</span>
+                      </div>
+                      {isAddon && (
+                        <p className="text-[10px] text-muted-foreground/80 font-sans mt-2 pt-2 border-t border-border/40 leading-snug">
+                          {t("services.addon_condition")}
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="flex justify-end">
+                <ActionButtons />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -481,7 +613,7 @@ export default function Index() {
                 viewport={{ once: true }}
                 className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow"
               >
-                <Link to={`/service/${item.key}`} className="block cursor-pointer">
+                <Link to={`/${currentLng}/service/${item.key}`} className="block cursor-pointer">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img src={item.img} alt={item.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                     {item.tag && (
@@ -491,7 +623,7 @@ export default function Index() {
                 </Link>
                 <div className="p-5">
                   <p className="text-[10px] text-accent tracking-widest uppercase font-sans mb-1">{t(`service.${item.key}.subtitle`)}</p>
-                  <Link to={`/service/${item.key}`} className="cursor-pointer">
+                  <Link to={`/${currentLng}/service/${item.key}`} className="cursor-pointer">
                     <h3 className="font-sans text-xl font-normal mb-2 hover:text-primary transition-colors">{t(`service.${item.key}.title`)}</h3>
                   </Link>
                   <p className="text-muted-foreground text-xs font-sans font-light leading-relaxed mb-4">{t(`service.${item.key}.shortDesc`)}</p>
@@ -520,16 +652,23 @@ export default function Index() {
 
           <div className="grid sm:grid-cols-3 gap-5 mb-8">
             {bodyCarePrices.map((s, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 } as const} viewport={{ once: true }} className="group bg-card border border-border rounded-2xl overflow-hidden">
-                <div className="aspect-[3/2] overflow-hidden">
-                  <img src={s.img} alt={t(`bodycare.item.${i}.name`)} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-5">
-                  <div className="font-sans text-lg mb-1">{t(`bodycare.item.${i}.name`)}</div>
-                  <div className="flex items-center justify-between text-xs mb-4 font-sans">
-                    <span className="text-muted-foreground">{s.duration} {t("bodycare.min")}</span>
-                    <span className="text-primary font-medium">{s.price} {t("bodycare.sum")}</span>
+              <motion.div key={i} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 } as const} viewport={{ once: true }} className="group bg-card border border-border rounded-2xl overflow-hidden flex flex-col justify-between">
+                <div>
+                  <div className="aspect-[3/2] overflow-hidden">
+                    <img src={s.img} alt={t(`bodycare.item.${i}.name`)} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
+                  <div className="p-5 pb-3">
+                    <div className="font-sans text-lg mb-1">{t(`bodycare.item.${i}.name`)}</div>
+                    <div className="flex items-center justify-between text-xs mb-3 font-sans">
+                      <span className="text-muted-foreground">{s.duration} {t("bodycare.min")}</span>
+                      <span className="text-primary font-medium">{s.price} {t("bodycare.sum")}</span>
+                    </div>
+                    <p className="text-[11px] text-muted-foreground/80 font-sans leading-snug">
+                      {t("services.addon_condition")}
+                    </p>
+                  </div>
+                </div>
+                <div className="p-5 pt-0">
                   <ActionButtons />
                 </div>
               </motion.div>
@@ -594,14 +733,14 @@ export default function Index() {
           </motion.div>
 
           <div className="space-y-2.5 mb-10">
-            {spaProgramsBase.map((prog, i) => (
-              <motion.div key={i} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.07 } as const} viewport={{ once: true }} className="flex items-center justify-between bg-white/8 hover:bg-white/12 transition-colors rounded-xl p-5 gap-4">
+            {spaProgramsList.filter((p) => !p.hidden).map((prog, i) => (
+              <motion.div key={prog.key} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.07 } as const} viewport={{ once: true }} className="flex items-center justify-between bg-white/8 hover:bg-white/12 transition-colors rounded-xl p-5 gap-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-1">
-                    <span className="font-sans text-xl">{t(`program.${i}.name`)}</span>
-                    <span className="text-white/40 text-xs font-sans tracking-wide">// {prog.duration}</span>
+                    <span className="font-sans text-xl">{t(`program.${prog.key}.name`)}</span>
+                    <span className="text-white/40 text-xs font-sans tracking-wide">// {prog.duration} {t("bodycare.min")}</span>
                   </div>
-                  <p className="text-white/45 text-xs font-sans font-light">{t(`program.${i}.desc`)}</p>
+                  <p className="text-white/45 text-xs font-sans font-light leading-relaxed">{t(`program.${prog.key}.desc`)}</p>
                 </div>
                 <div className="text-right shrink-0">
                   <div className="font-sans text-2xl">{prog.price}</div>
@@ -622,86 +761,128 @@ export default function Index() {
             <h2 className="font-sans text-5xl font-light">{t("pricing.title")}</h2>
           </motion.div>
 
-          <div className="flex flex-wrap gap-3 mb-7">
-            {(Object.keys(pricingData) as Branch[]).map((key) => (
-              <button key={key} onClick={() => setActiveBranch(key)} className={`px-5 py-2.5 rounded-full text-xs font-medium transition-all cursor-pointer font-sans tracking-wider uppercase ${activeBranch === key ? "bg-primary text-primary-foreground" : "bg-card border border-border hover:border-primary/40"}`}>
-                {t(`pricing.branch.${key}`)}
+          {/* 5 Branches tabs */}
+          <div className="flex flex-wrap gap-2.5 mb-7">
+            {BRANCHES.map((b) => (
+              <button
+                key={b.id}
+                onClick={() => setActiveBranch(b.id)}
+                className={`px-5 py-2.5 rounded-full text-xs font-medium transition-all cursor-pointer font-sans tracking-wider uppercase ${
+                  activeBranch === b.id
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "bg-card border border-border hover:border-primary/40 text-foreground/80 hover:text-foreground"
+                }`}
+              >
+                {t(`pricing.branch.${b.id}`)}
               </button>
             ))}
           </div>
 
+          {/* Weekday / Weekend tabs */}
           <div className="flex gap-3 mb-10">
             {(["weekday", "weekend"] as DayType[]).map((dt) => (
-              <button key={dt} onClick={() => setDayType(dt)} className={`px-6 py-2 rounded-full text-xs transition-all cursor-pointer font-sans tracking-wider uppercase ${dayType === dt ? "bg-accent text-accent-foreground" : "border border-border hover:border-accent/50"}`}>
+              <button
+                key={dt}
+                onClick={() => setDayType(dt)}
+                className={`px-6 py-2 rounded-full text-xs transition-all cursor-pointer font-sans tracking-wider uppercase ${
+                  dayType === dt ? "bg-accent text-accent-foreground" : "border border-border hover:border-accent/50"
+                }`}
+              >
                 {dt === "weekday" ? t("pricing.weekday") : t("pricing.weekend")}
               </button>
             ))}
           </div>
 
-          <div className="grid gap-6 max-w-md">
-            <motion.div key={`${activeBranch}-${dayType}-sauna`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-card border border-border rounded-2xl overflow-hidden">
+          {/* Sauna & VIP tariff cards */}
+          <div className={`grid gap-6 ${currentGroup.vip ? "grid-cols-1 md:grid-cols-2 max-w-4xl" : "max-w-md"}`}>
+            {/* Standard Hall */}
+            <motion.div
+              key={`${activeBranch}-${dayType}-standard`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="bg-card border border-border rounded-2xl overflow-hidden"
+            >
               <div className="bg-primary text-primary-foreground p-5">
                 <h3 className="font-sans text-xl">{t("pricing.sauna_title")}</h3>
                 <p className="text-white/45 text-xs mt-1 font-sans">{t("pricing.sauna_desc")}</p>
               </div>
               <div className="p-5">
-                {branch.sauna[dayType].map((row) => (
+                {currentGroup.sauna[dayType].map((row) => (
                   <div key={row.time} className="flex items-center justify-between py-3 border-b border-border last:border-0">
-                    <div className="flex items-center gap-2"><Clock className="w-3.5 h-3.5 text-muted-foreground" /><span className="text-sm font-sans">{row.time}</span></div>
-                    <span className="font-sans text-primary text-base">{row.price} <span className="text-xs font-sans font-normal text-muted-foreground">{t("bodycare.sum")}</span></span>
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-3.5 h-3.5 text-muted-foreground" />
+                      <span className="text-sm font-sans">{row.time}</span>
+                    </div>
+                    <span className="font-sans text-primary text-base">
+                      {row.price} <span className="text-xs font-sans font-normal text-muted-foreground">{t("pricing.sauna_rate_unit")}</span>
+                    </span>
                   </div>
                 ))}
               </div>
             </motion.div>
+
+            {/* VIP Hall (Groups 2 & 3) */}
+            {currentGroup.vip && (
+              <motion.div
+                key={`${activeBranch}-${dayType}-vip`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="bg-card border border-border rounded-2xl overflow-hidden"
+              >
+                <div className="bg-accent text-accent-foreground p-5">
+                  <h3 className="font-sans text-xl">{t("pricing.vip_title")}</h3>
+                  <p className="text-accent-foreground/60 text-xs mt-1 font-sans">{t("pricing.vip_desc")}</p>
+                </div>
+                <div className="p-5">
+                  {currentGroup.vip[dayType].map((row) => (
+                    <div key={row.time} className="flex items-center justify-between py-3 border-b border-border last:border-0">
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-3.5 h-3.5 text-muted-foreground" />
+                        <span className="text-sm font-sans">{row.time}</span>
+                      </div>
+                      <span className="font-sans text-primary text-base">
+                        {row.price} <span className="text-xs font-sans font-normal text-muted-foreground">{t("pricing.sauna_rate_unit")}</span>
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
           </div>
 
-          <div className="mt-5 bg-muted/60 border border-border rounded-xl p-4 flex items-center gap-3 text-sm font-sans">
-            <Users className="w-4 h-4 text-accent shrink-0" />
-            <span className="text-muted-foreground text-xs">{t("pricing.extra")} <strong className="text-foreground">{branch.extra} {t("bodycare.sum")} / 1 {t("pricing.per_hour").split(" / 1 ")[1]}</strong></span>
+          {/* Terms & Extra guest notice */}
+          <div className="mt-6 grid sm:grid-cols-2 gap-4 max-w-4xl">
+            <div className="bg-muted/60 border border-border rounded-xl p-4 flex items-center gap-3 text-sm font-sans">
+              <Users className="w-4 h-4 text-accent shrink-0" />
+              <span className="text-muted-foreground text-xs">
+                {t("pricing.extra")}{" "}
+                <strong className="text-foreground">
+                  {currentGroup.extra} {t("bodycare.sum")} / 1 {t("pricing.hour_unit")}
+                </strong>
+              </span>
+            </div>
+            <div className="bg-muted/60 border border-border rounded-xl p-4 flex items-center gap-3 text-sm font-sans">
+              <Clock className="w-4 h-4 text-accent shrink-0" />
+              <span className="text-muted-foreground text-xs font-medium">
+                {t("pricing.min_rental")}
+              </span>
+            </div>
           </div>
 
           {/* Full service menu / price list of the selected branch (image slider) */}
           <PriceMenuSlider
-            branches={Object.keys(pricingData) as Branch[]}
-            active={activeBranch}
-            onChange={setActiveBranch}
+            branches={["c1", "sergeli", "karasaray"]}
+            active={branchConfig.sliderImage}
+            onChange={(selectedImg) => {
+              const target = BRANCHES.find((b) => b.sliderImage === selectedImg);
+              if (target) setActiveBranch(target.id);
+            }}
             lng={lng === "uz" ? "uz" : "ru"}
           />
 
           <div className="mt-8"><ActionButtons /></div>
-        </div>
-      </section>
-
-      {/* ── PROMOS ── */}
-      <section id="promos" className="py-20 px-4 bg-muted/40">
-        <div className="max-w-5xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
-            <Label>{t("promos.label")}</Label>
-            <h2 className="font-sans text-5xl font-light">{t("promos.title")}</h2>
-          </motion.div>
-          <div className="grid md:grid-cols-2 gap-5 mb-8">
-            {promosDiscounts.map((discount, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 } as const} viewport={{ once: true }} className="bg-card border border-border rounded-2xl p-6">
-                <span className="inline-block text-[10px] font-semibold bg-primary/8 text-primary px-3 py-1 rounded-full mb-4 font-sans tracking-widest uppercase">{t(`promo.${i}.tag`)}</span>
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="font-sans text-xl mb-1.5">{t(`promo.${i}.title`)}</h3>
-                    <p className="text-muted-foreground text-xs font-sans font-light leading-relaxed">{t(`promo.${i}.desc`)}</p>
-                  </div>
-                  <div className="shrink-0 font-sans text-3xl text-accent">{discount}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-          <div className="bg-card border border-border rounded-xl p-5 text-xs text-muted-foreground font-sans mb-8">
-            <p className="font-medium text-foreground mb-2 text-sm">{t("promos.note_title")}</p>
-            <ul className="space-y-1 list-disc list-inside leading-relaxed">
-              <li>{t("promos.note1")}</li>
-              <li>{t("promos.note2")}</li>
-              <li>{t("promos.note3")}</li>
-            </ul>
-          </div>
-          <ActionButtons />
         </div>
       </section>
 

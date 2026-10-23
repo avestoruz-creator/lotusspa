@@ -8,12 +8,13 @@ import { useTranslation } from "react-i18next";
 const allServices = [...massageServices, ...saunaServices];
 
 export default function ServicePage() {
-  const { key } = useParams<{ key: string }>();
+  const { lng, key } = useParams<{ lng: string; key: string }>();
+  const currentLng = lng ?? "ru";
   const navigate = useNavigate();
   const { t } = useTranslation("common");
 
   const service = allServices.find((s) => s.key === key);
-  const otherServices = allServices.filter((s) => s.key !== key);
+  const otherServices = allServices.filter((s) => s.key !== key && !s.hidden);
 
   // Scroll to top every time a service page opens
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function ServicePage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-4 px-4">
         <p className="text-muted-foreground font-sans">{t("service.page.not_found")}</p>
-        <Link to="/" className="text-primary underline font-sans text-sm">{t("service.page.to_home")}</Link>
+        <Link to={`/${currentLng}`} className="text-primary underline font-sans text-sm">{t("service.page.to_home")}</Link>
       </div>
     );
   }
@@ -52,14 +53,14 @@ export default function ServicePage() {
           </button>
 
           {/* Logo — center */}
-          <Link to="/" className="flex items-center gap-2.5 cursor-pointer absolute left-1/2 -translate-x-1/2">
+          <Link to={`/${currentLng}`} className="flex items-center gap-2.5 cursor-pointer absolute left-1/2 -translate-x-1/2">
             <img src={LOGO_URL} alt="Lotus Spa" className="h-10 w-10 object-contain rounded-full shrink-0" />
             <span className="font-sans text-base font-medium text-primary tracking-widest uppercase">Lotus Spa</span>
           </Link>
 
           {/* Close — right */}
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate(`/${currentLng}`)}
             className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer p-1"
           >
             <X className="w-5 h-5" />
@@ -107,7 +108,7 @@ export default function ServicePage() {
               {/* Price line */}
               {service.prices.length > 0 && (
                 <p className="text-muted-foreground font-sans font-light text-sm mb-6 tracking-wide">
-                  {service.prices.map((p) => `${p.label} ${t("bodycare.min")}`).join(" – ")} // {service.prices.map((p) => p.price).join("–")} UZS
+                  {service.prices.map((p) => `${p.label} ${t("bodycare.min")}`).join(" – ")} // {service.prices.map((p) => p.price).join(" – ")} {t("bodycare.sum")}
                 </p>
               )}
 
@@ -142,23 +143,36 @@ export default function ServicePage() {
                 </div>
               )}
 
-              {/* CTA buttons */}
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href={TEL_HREF}
-                  className="flex items-center gap-2 border border-primary text-primary px-7 py-3 rounded-full text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-all cursor-pointer font-sans tracking-wider uppercase"
-                >
-                  <Phone className="w-3.5 h-3.5" /> {t("call.btn")}
-                </a>
-                <a
-                  href={TG_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3 rounded-full text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer font-sans tracking-wider uppercase"
-                >
-                  <CalendarCheck className="w-3.5 h-3.5" /> {t("service.page.book_online")}
-                </a>
-              </div>
+              {/* CTA buttons / Notice for hidden services */}
+              {service.hidden ? (
+                <div className="bg-muted/70 border border-border rounded-2xl p-6 mb-6">
+                  <p className="text-sm font-medium text-foreground mb-1.5">{t("service.hidden_notice")}</p>
+                  <p className="text-xs text-muted-foreground mb-5 leading-relaxed">{t("service.hidden_care_hint")}</p>
+                  <Link
+                    to={`/${currentLng}#programs`}
+                    className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-full text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer font-sans tracking-wider uppercase"
+                  >
+                    {t("service.hidden_explore")}
+                  </Link>
+                </div>
+              ) : (
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href={TEL_HREF}
+                    className="flex items-center gap-2 border border-primary text-primary px-7 py-3 rounded-full text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-all cursor-pointer font-sans tracking-wider uppercase"
+                  >
+                    <Phone className="w-3.5 h-3.5" /> {t("call.btn")}
+                  </a>
+                  <a
+                    href={TG_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3 rounded-full text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer font-sans tracking-wider uppercase"
+                  >
+                    <CalendarCheck className="w-3.5 h-3.5" /> {t("service.page.book_online")}
+                  </a>
+                </div>
+              )}
             </div>
           </motion.div>
 
@@ -174,7 +188,7 @@ export default function ServicePage() {
                   transition={{ delay: 0.1 + i * 0.06 } as const}
                 >
                   <Link
-                    to={`/service/${s.key}`}
+                    to={`/${currentLng}/service/${s.key}`}
                     className="group block cursor-pointer"
                   >
                     <div className="rounded-2xl overflow-hidden aspect-[3/4] mb-3">
@@ -197,24 +211,26 @@ export default function ServicePage() {
             </div>
           </div>
 
-          {/* Bottom CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 } as const}
-            className="mt-16 bg-primary text-primary-foreground rounded-2xl p-10 text-center"
-          >
-            <h3 className="font-sans text-3xl font-light mb-2">{t("service.page.cta_title")}</h3>
-            <p className="text-white/75 text-[10px] mb-7 font-sans tracking-widest uppercase">{t("service.page.cta_subtitle")}</p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a href={TEL_HREF} className="flex items-center justify-center gap-2 border border-white/35 text-white px-7 py-3 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/10 transition-all cursor-pointer">
-                <Phone className="w-3.5 h-3.5" /> {t("call.btn")}
-              </a>
-              <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white text-neutral-900 px-7 py-3 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/90 transition-all cursor-pointer">
-                <CalendarCheck className="w-3.5 h-3.5" /> {t("service.page.book_online")}
-              </a>
-            </div>
-          </motion.div>
+          {/* Bottom CTA (only if service is not hidden) */}
+          {!service.hidden && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 } as const}
+              className="mt-16 bg-primary text-primary-foreground rounded-2xl p-10 text-center"
+            >
+              <h3 className="font-sans text-3xl font-light mb-2">{t("service.page.cta_title")}</h3>
+              <p className="text-white/75 text-[10px] mb-7 font-sans tracking-widest uppercase">{t("service.page.cta_subtitle")}</p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <a href={TEL_HREF} className="flex items-center justify-center gap-2 border border-white/35 text-white px-7 py-3 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/10 transition-all cursor-pointer">
+                  <Phone className="w-3.5 h-3.5" /> {t("call.btn")}
+                </a>
+                <a href={TG_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white text-neutral-900 px-7 py-3 rounded-full text-xs font-sans tracking-wider uppercase hover:bg-white/90 transition-all cursor-pointer">
+                  <CalendarCheck className="w-3.5 h-3.5" /> {t("service.page.book_online")}
+                </a>
+              </div>
+            </motion.div>
+          )}
         </div>
       </div>
     </div>
