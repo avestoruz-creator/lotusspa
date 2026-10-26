@@ -47,7 +47,8 @@ export default function PriceMenuSlider({ branches, active, onChange, lng }: Pri
 
   const total = branches.length;
   const index = Math.max(0, branches.indexOf(active));
-  const branchLabel = t(`pricing.branch.${active}`);
+  const groupKey = active === "c1" ? "parkent_c1" : active === "sergeli" ? "aviasozlar_sergeli" : "karasaray";
+  const branchLabel = t(`pricing.group.${groupKey}`);
   const { preview, full } = priceMenuImage(active, lng);
   const slideKey = `${active}-${lng}`;
 
@@ -55,20 +56,26 @@ export default function PriceMenuSlider({ branches, active, onChange, lng }: Pri
   // Arrows / swipes set it explicitly (so wrapping 3 → 1 still slides forward);
   // changes coming from outside (branch tabs) derive it from the index delta.
   const pendingDirection = useRef<1 | -1 | null>(null);
+  const prevIndexRef = useRef(index);
   const [direction, setDirection] = useState<1 | -1>(1);
-  const [lastIndex, setLastIndex] = useState(index);
-  if (index !== lastIndex) {
-    setDirection(pendingDirection.current ?? (index > lastIndex ? 1 : -1));
-    setLastIndex(index);
-  }
-  useEffect(() => {
-    pendingDirection.current = null;
-  }, [index]);
 
   const go = (step: 1 | -1) => {
     pendingDirection.current = step;
+    setDirection(step);
     onChange(branches[(index + step + total) % total]);
   };
+
+  useEffect(() => {
+    if (index !== prevIndexRef.current) {
+      if (pendingDirection.current !== null) {
+        setDirection(pendingDirection.current);
+        pendingDirection.current = null;
+      } else {
+        setDirection(index > prevIndexRef.current ? 1 : -1);
+      }
+      prevIndexRef.current = index;
+    }
+  }, [index]);
 
   // ── Loading state (per image) ──────────────────────────────────────────────
   const [loaded, setLoaded] = useState<Record<string, boolean>>({});
@@ -229,7 +236,7 @@ export default function PriceMenuSlider({ branches, active, onChange, lng }: Pri
                 key={b}
                 type="button"
                 onClick={() => onChange(b)}
-                aria-label={t("pricing.menu.goto", { branch: t(`pricing.branch.${b}`) })}
+                aria-label={t("pricing.menu.goto", { branch: t(`pricing.group.${b === "c1" ? "parkent_c1" : b === "sergeli" ? "aviasozlar_sergeli" : "karasaray"}`) })}
                 aria-current={i === index ? "true" : undefined}
                 className={`h-2 rounded-full transition-all cursor-pointer ${i === index ? "w-6 bg-primary" : "w-2 bg-border hover:bg-primary/40"}`}
               />
